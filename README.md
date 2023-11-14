@@ -2,6 +2,7 @@
 
 ## Team Members
 
+- Mahima Sureka
 - Praneeth Sirigannagari
 - Reethika Kesani
 
