@@ -3,6 +3,7 @@
 ## Team Members
 
 - Mahima Sureka
+- Reethika Kesani
 
 ## How to Initialize and Run the App
 
