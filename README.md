@@ -1,8 +1,8 @@
-# Team xxxx
+# Team Aquamarine
 
 ## Team Members
 
-- xxxx
+- Praneeth Sirigannagari
 
 ## How to Initialize and Run the App
 
