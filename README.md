@@ -1,8 +1,8 @@
-# Team xxxx
+# Team Aquamarine
 
 ## Team Members
 
-- xxxx
+- Reethika Kesani
 
 ## How to Initialize and Run the App
 
