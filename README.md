@@ -1,8 +1,8 @@
-# Team xxxx
+# Team Aquamarine
 
 ## Team Members
 
-- xxxx
+- Mahima Sureka
 
 ## How to Initialize and Run the App
 
