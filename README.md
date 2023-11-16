@@ -2,8 +2,9 @@
 
 ## Team Members
 
+
 - Mahima Sureka(surekamahima96@gmail.com)
-- Praneeth Sirigannagari
+- Praneeth Sirigannagari (praneethreddy3496@gmail.com)
 - Reethika Kesani
 - Zeke Lewis (eelewis@memphis.edu)
 
