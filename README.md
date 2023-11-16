@@ -2,10 +2,11 @@
 
 ## Team Members
 
-- Mahima Sureka
-- Praneeth Sirigannagari
+
+- Mahima Sureka(surekamahima96@gmail.com)
+- Praneeth Sirigannagari (praneethreddy3496@gmail.com)
 - Reethika Kesani (reethikakesani03@gmail.com)
-- Zeke Lewis
+- Zeke Lewis (eelewis@memphis.edu)
 
 ## How to Initialize and Run the App
 
