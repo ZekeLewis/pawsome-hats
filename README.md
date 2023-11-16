@@ -5,6 +5,7 @@
 - Mahima Sureka
 - Praneeth Sirigannagari
 - Reethika Kesani
+- Zeke Lewis
 
 ## How to Initialize and Run the App
 
