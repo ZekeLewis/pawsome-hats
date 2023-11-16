@@ -5,7 +5,7 @@
 - Mahima Sureka
 - Praneeth Sirigannagari
 - Reethika Kesani
-- Zeke Lewis
+- Zeke Lewis (eelewis@memphis.edu)
 
 ## How to Initialize and Run the App
 
