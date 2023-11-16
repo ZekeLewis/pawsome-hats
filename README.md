@@ -4,7 +4,7 @@
 
 - Mahima Sureka
 - Praneeth Sirigannagari
-- Reethika Kesani
+- Reethika Kesani (reethikakesani03@gmail.com)
 - Zeke Lewis
 
 ## How to Initialize and Run the App
