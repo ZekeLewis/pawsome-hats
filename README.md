@@ -3,7 +3,7 @@
 ## Team Members
 
 - Mahima Sureka
-- Praneeth Sirigannagari
+- Praneeth Sirigannagari (praneethreddy3496@gmail.com)
 - Reethika Kesani
 - Zeke Lewis
 
