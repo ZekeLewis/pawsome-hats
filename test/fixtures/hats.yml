@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: hats
+#
+#  id          :bigint           not null, primary key
+#  category    :string
+#  description :text
+#  image       :binary
+#  price       :decimal(, )
+#  title       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+one:
+  title: MyString
+  image: 
+  description: MyText
+  category: MyString
+  price: 9.99
+
+two:
+  title: MyString
+  image: 
+  description: MyText
+  category: MyString
+  price: 9.99
