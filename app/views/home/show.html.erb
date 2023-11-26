@@ -1,5 +1,28 @@
-<h1>Home Page</h1>
+<%# app/views/home/index.html.erb %>
 
-<p>
-  Find me in app/views/home/show.html.erb
-</p>
+<%= render 'navbar' %>
+
+<h1>Welcome to the Dog Hat Store!</h1>
+
+<h1>Hats Collection</h1>
+
+<%= form_with(url: home_path, method: :get, local: true) do |form| %>
+  <%= form.label :category, 'Filter by Category:' %>
+  <%= form.select :category, Hat.distinct.pluck(:category), include_blank: true %>
+  <%= form.submit 'Filter Hats' %>
+<% end %>
+
+<div class="hats-container">
+  <% @hats.each do |hat| %>
+    <div class="hat">
+      <% if hat.image.attached? %>
+        <%= image_tag hat.image, class: "hat-image" %>
+      <% end %>
+      <h3><%= hat.title %></h3>
+      <p><%= hat.description %></p>
+      <p>Category: <%= hat.category %></p>
+      <p>Price: $<%= hat.price %></p>
+    </div>
+  <% end %>
+</div>
+
