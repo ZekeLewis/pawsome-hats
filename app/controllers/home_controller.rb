@@ -8,4 +8,9 @@ class HomeController < ApplicationController
     end
   end
 
+
+  def custom
+    render :custom
+  end
+
 end

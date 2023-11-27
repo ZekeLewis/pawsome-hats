@@ -10,6 +10,15 @@
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  cart_id     :bigint
+#
+# Indexes
+#
+#  index_hats_on_cart_id  (cart_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (cart_id => carts.id)
 #
 require "test_helper"
 
