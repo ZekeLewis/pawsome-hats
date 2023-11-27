@@ -20,39 +20,26 @@ user2 = User.create!(
 )
 
 hat1 = Hat.create!(
-  title:    'Doberman Hat',
+  title:    'doberman hat',
   price: 10.99,
   description: 'hat that looks like a doberman',
   category: 'large dog'
 )
-hat4 = Hat.create!(
-  title:    'Doberman Hat2',
-  price: 19.99,
-  description: 'hat that looks like a doberman upgraded version',
-  category: 'small dog'
-)
 
 hat2 = Hat.create!(
-  title:    'Poodle Hat',
+  title:    'poodle hat',
   price: 10.99,
   description: 'hat that looks like a poodle',
   category: 'small dog'
 )
 
 hat3 = Hat.create!(
-  title:    'Chihuahua Hat',
+  title:    'chihuahua hat',
   price: 10.99,
   description: 'hat that looks like a chihuahua',
   category: 'small dog'
 )
 
-image_path1 = Rails.root.join('db', 'images', 'image1.jpeg')
-image_path2 = Rails.root.join('db', 'images', 'placeholder.jpeg')
-image_path3 = Rails.root.join('db', 'images', 'image2.jpeg')
-hat1.image.attach(io: File.open(image_path1), filename: 'image1.jpeg')
-hat2.image.attach(io: File.open(image_path2), filename: 'placeholder.jpeg')
-hat3.image.attach(io: File.open(image_path2), filename: 'placeholder.jpeg')
-hat4.image.attach(io: File.open(image_path3), filename: 'image2.jpeg')
 cart1 = Cart.create!(
   listing: 1,
   user: user1
@@ -66,10 +53,7 @@ cart2 = Cart.create!(
 cart1.hats << [hat1, hat3]
 cart2.hats << [hat2]
 
-image_path1 = Rails.root.join('db', 'images', 'image1.jpeg')
-image_path2 = Rails.root.join('db', 'images', 'placeholder.jpeg')
-image_path3 = Rails.root.join('db', 'images', 'image2.jpeg')
-hat1.image.attach(io: File.open(image_path1), filename: 'image1.jpeg')
-hat2.image.attach(io: File.open(image_path2), filename: 'placeholder.jpeg')
-hat3.image.attach(io: File.open(image_path2), filename: 'placeholder.jpeg')
-hat4.image.attach(io: File.open(image_path3), filename: 'image2.jpeg')
+image_path1 = Rails.root.join('db', 'images', 'placeholder.jpeg')
+hat1.image.attach(io: File.open(image_path1), filename: 'placeholder.jpeg')
+hat2.image.attach(io: File.open(image_path1), filename: 'placeholder.jpeg')
+hat3.image.attach(io: File.open(image_path1), filename: 'placeholder.jpeg')
