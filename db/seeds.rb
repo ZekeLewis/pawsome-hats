@@ -40,6 +40,19 @@ hat3 = Hat.create!(
   category: 'small dog'
 )
 
+cart1 = Cart.create!(
+  listing: 1,
+  user: user1
+)
+
+cart2 = Cart.create!(
+  listing: 1,
+  user: user1
+)
+
+cart1.hats << [hat1, hat3]
+cart2.hats << [hat2]
+
 image_path1 = Rails.root.join('db', 'images', 'placeholder.jpeg')
 hat1.image.attach(io: File.open(image_path1), filename: 'placeholder.jpeg')
 hat2.image.attach(io: File.open(image_path1), filename: 'placeholder.jpeg')

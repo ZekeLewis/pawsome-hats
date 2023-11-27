@@ -1,0 +1,14 @@
+<h1>Welcome to Trade Page</h1>
+<p>You can put up your old hats for sale here</p>
+
+<p>
+  <%= link_to 'Home', home_path %>
+</p>
+
+
+<p class="nav-item">
+
+            <%= button_to 'Sign Out', destroy_user_session_path,
+                        method: :delete, data: { turbo: false }, class: "nav-link  btn btn-link" %>
+       
+</p>
