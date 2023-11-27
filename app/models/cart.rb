@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: carts
+#
+#  id         :bigint           not null, primary key
+#  listing    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint
+#
+# Indexes
+#
+#  index_carts_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+class Cart < ApplicationRecord
+    
+    belongs_to :user
+    has_many(
+        :cart_items,
+        class_name: 'CartItem',
+        foreign_key: 'cart_id',
+        inverse_of: :cart,
+        dependent: :destroy
+      )
+     
+      has_many :hats, through: :cart_items
+end

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   root to: redirect('/home')
 
   get 'home', to: 'home#show', as: 'home'
+  get 'home/cart', to: 'cart#cart' , as: 'cart'
+  get 'home/trade', to: 'trade#trade' , as: 'trade'
+  get 'home/order', to: 'order#order' , as: 'order'
+  get 'home/custom-hat', to: 'custom#custom' , as: 'custom'
 
 
   # Devise routes for user sign-in, sign-up, sign-out, etc.
