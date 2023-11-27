@@ -1,7 +1,5 @@
 <%# app/views/home/index.html.erb %>
 
-<%= render 'navbar' %>
-
 <h1>Welcome to the Dog Hat Store!</h1>
 
 <h1>Hats Collection</h1>
@@ -12,17 +10,26 @@
   <%= form.submit 'Filter Hats' %>
 <% end %>
 
+
+
 <div class="hats-container">
   <% @hats.each do |hat| %>
-    <div class="hat">
-      <% if hat.image.attached? %>
-        <%= image_tag hat.image, class: "hat-image" %>
-      <% end %>
-      <h3><%= hat.title %></h3>
-      <p><%= hat.description %></p>
-      <p>Category: <%= hat.category %></p>
-      <p>Price: $<%= hat.price %></p>
-    </div>
+    <% first_part_of_title = hat.title.split(' ').first.downcase %>
+    <% path_helper = "#{first_part_of_title}index_path" %>
+     <%= link_to send(path_helper) do %>
+      <div class="hat">
+        <% if hat.image.attached? %>
+          <%= image_tag hat.image, class: "hat-image" %>
+        <% end %>
+        <h3><%= hat.title %></h3>
+        <p>Category: <%= hat.category %></p>
+
+      </div>
+       <% end %>
+   
   <% end %>
 </div>
+
+
+
 

@@ -1,0 +1,11 @@
+<!-- app/views/hats/show.html.erb -->
+<h1><%= @hat.title %></h1>
+<% if @hat.image.attached? %>
+  <%= image_tag @hat.image %>
+<% end %>
+<p>Price : <%= number_to_currency(@hat.price) %></p>
+<p>Description : <%= @hat.description %></p> <!-- Assuming you have a description attribute -->
+<p>Category : <%= @hat.category %></p>
+
+ <td><%= link_to "Add to cart" %></td>
+  <td><%= link_to "Back", index_path %></td>

@@ -1,0 +1,2 @@
+module ChihuahuahatHelper
+end
