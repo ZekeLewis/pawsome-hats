@@ -1,0 +1,23 @@
+<h1>Doberman Hats</h1>
+<%= form_with url: dobermanindex_path, method: :get, local: true, class: 'search-form' do |form| %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search for a Doberman hat", class: 'search-input' %>
+  <%= submit_tag "Search", class: 'search-button'%>
+<% end %>
+
+
+<div class="hats_class">
+  <% @dobermanhats.each do |hat| %>
+    <%= link_to dobermanhat_path(hat) do %>
+      <div class="viewhats">
+        <%= image_tag hat.image, class: "hat" if hat.image.attached? %>
+        <div class="hat-info">
+          <h3><%= hat.title %></h3>
+          <p><%= number_to_currency(hat.price) %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+
