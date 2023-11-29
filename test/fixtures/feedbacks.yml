@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: feedbacks
+#
+#  id         :bigint           not null, primary key
+#  category   :string
+#  details    :text
+#  rating     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  rating: 1
+  category: MyString
+  details: MyText
+
+two:
+  rating: 1
+  category: MyString
+  details: MyText

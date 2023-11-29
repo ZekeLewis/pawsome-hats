@@ -1,0 +1,36 @@
+<!-- app/views/feedbacks/new.html.erb -->
+<div class="container mt-4">
+  <h2 class="mb-4">Customer Feedback</h2>
+
+  <% if flash.now[:alert] %>
+    <div class="alert alert-danger" role="alert">
+      <%= flash.now[:alert] %>
+    </div>
+  <% end %>
+
+  <%= form_for @feedback, url: feedbacks_path do |f| %>
+    <div class="mb-3">
+      <%= f.label :rating, class: "form-label" %>
+      <%= f.select :rating, (1..5).to_a, { prompt: 'Select a rating', required: true }, class: "form-select" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :category, class: "form-label" %>
+      <%= f.select :category, ['Bug Report', 'Suggestion','Comment'], { prompt: 'Select a category', required: true }, class: "form-select" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :details, class: "form-label" %>
+      <%= f.text_area :details, class: "form-control" %>
+    </div>
+     <!-- Display the error message -->
+    <% if @feedback.errors.any? %>
+      <div class="alert alert-danger">
+        <p><strong>Error:</strong> <%= @feedback.errors.full_messages.join(', ') %></p>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.submit 'Send Feedback', class: "btn btn-primary" %>
+    </div>
+    
+  <% end %>
+</div>
