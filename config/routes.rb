@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: redirect('/home')
-
+  resources :feedbacks, only: [:new, :create]
   get 'home', to: 'home#show', as: 'home'
   get 'home/cart', to: 'cart#cart' , as: 'cart'
   get 'home/trade', to: 'trade#trade' , as: 'trade'
@@ -18,7 +18,12 @@ Rails.application.routes.draw do
   get 'home/dobermanhat', to: 'dobermanhat#index', as: 'dobermanindex'
 
   get 'home/dobermanhat/:id', to: 'dobermanhat#show', as: 'dobermanhat'
- 
+
+get 'home/feedback', to: 'feedbacks#new', as: 'new_home_feedback'
+post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
+
+get 'cart/review', to: 'cart#review', as: 'review_cart'
+post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'apply_promo_code'
 
 
 
