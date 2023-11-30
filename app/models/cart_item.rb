@@ -19,17 +19,6 @@
 #  fk_rails_...  (hat_id => hats.id)
 #
 class CartItem < ApplicationRecord
-  belongs_to(
-    :cart,
-    class_name: 'Cart',
-    foreign_key: 'cart_id',
-    inverse_of: :cart_items
-  )
- 
-  belongs_to(
-    :hat,
-    class_name: 'Hat',
-    foreign_key: 'hat_id',
-    inverse_of: :cart_items
-  )
+  belongs_to :cart
+  belongs_to :hat
 end

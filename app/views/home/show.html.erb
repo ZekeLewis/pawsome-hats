@@ -1,35 +1,35 @@
-<%# app/views/home/index.html.erb %>
 
-<h1>Welcome to the Dog Hat Store!</h1>
+<body class=" .bg-light.bg-gradient">
+<div class="container mt-4 ">
+  <h1 class="text-center">Welcome to the Dog Hat Store!</h1>
+  <h2 class="text-center mb-4">Hats Collection</h2>
 
-<h1>Hats Collection</h1>
-
-<%= form_with(url: home_path, method: :get, local: true) do |form| %>
-  <%= form.label :category, 'Filter by Category:' %>
-  <%= form.select :category, Hat.distinct.pluck(:category), include_blank: true %>
-  <%= form.submit 'Filter Hats' %>
-<% end %>
-
-
-
-<div class="hats-container">
-  <% @hats.each do |hat| %>
-    <% first_part_of_title = hat.title.split(' ').first.downcase %>
-    <% path_helper = "#{first_part_of_title}index_path" %>
-     <%= link_to send(path_helper) do %>
-      <div class="hat">
-        <% if hat.image.attached? %>
-          <%= image_tag hat.image, class: "hat-image" %>
-        <% end %>
-        <h3><%= hat.title %></h3>
-        <p>Category: <%= hat.category %></p>
-
-      </div>
-       <% end %>
-   
+  <%= form_with(url: home_path, method: :get, local: true, class: 'form-inline justify-content-center mb-4') do |form| %>
+    <%= form.label :category, 'Filter by Category:', class: 'mr-2' %>
+    <%= form.select :category, Hat.distinct.pluck(:category), { include_blank: true }, { class: 'form-control mr-2' } %>
+    <%= form.submit 'Filter Hats', class: 'btn btn-primary' %>
   <% end %>
+
+  <div class="row">
+    <% @hats.each do |hat| %>
+     <% first_part_of_title = hat.title.split(' ').first.downcase %>
+    <% path_helper = "#{first_part_of_title}index_path" %>
+      <div class="col-md-4 mb-4">
+        <%= link_to send(path_helper) do %>
+          <div class="card">
+            <% if hat.image.attached? %>
+              <div class="card-img-top img-fluid" style="background: url('<%= url_for(hat.image) %>') no-repeat center center; background-size: cover; height: 200px;">
+                <!-- Image background -->
+              </div>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= hat.title %></h5>
+              <p class="card-text">Category: <%= hat.category %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-
-
-
+</body>
