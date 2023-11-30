@@ -1,5 +1,8 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
+    <%= link_to home_path, class: "navbar-brand" do %>
+  <strong class="text-white">Pawsome Hats</strong>
+<% end %>
     
     <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
@@ -11,30 +14,28 @@
     </button>
     <div class="collapse navbar-collapse"
          id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <%= link_to 'Home', home_path,
-                      class: "nav-link #{active_class(home_path)}" %>
-        </li>
-         <%= link_to 'Trade', trade_path,
-                      class: "nav-link #{active_class(trade_path)}" %>
-      
-         <%= link_to 'Custom-HAT', custom_path,
-                      class: "nav-link #{active_class(custom_path)}" %>
-          <%= link_to 'Feedback', new_home_feedback_path, class: "nav-link #{active_class(new_home_feedback_path)}" %>
 
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'Trade', trade_path, class: "nav-link #{active_class(trade_path)}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Custom-HAT', custom_path, class: "nav-link #{active_class(custom_path)}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Cart', review_cart_path, class: "nav-link #{active_class(review_cart_path)}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Orders', order_path, class: "nav-link #{active_class(order_path)}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Feedback', new_home_feedback_path, class: "nav-link #{active_class(new_home_feedback_path)}" %>
+        </li>
       </ul>
 
  
       <ul class="navbar-nav">
        <li class="nav-item">
-          <%= link_to 'Cart', cart_path,
-                      class: "nav-link #{active_class(cart_path)}" %>
-        </li>
-          </li>
-         <%= link_to 'Orders', order_path,
-                      class: "nav-link #{active_class(order_path)}" %>
-        </li>
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Hi, #{current_user.email}", edit_user_registration_path,

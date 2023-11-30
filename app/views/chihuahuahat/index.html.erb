@@ -1,23 +1,23 @@
-<h1>Chihuahua Hats</h1>
-<%= form_with url: chihuahuaindex_path, method: :get, local: true, class: 'search-form' do |form| %>
-  <%= text_field_tag :query, params[:query], placeholder: "Search for a Chihuahua hat", class: 'search-input' %>
-  <%= submit_tag "Search", class: 'search-button'%>
+<h1 class="mt-4">Chihuahua Hats</h1>
+<%= form_with url: chihuahuaindex_path, method: :get, local: true, class: 'form-inline my-3 justify-content-center' do |form| %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search for a Chihuahua hat", class: 'form-control mr-2' %>
+  <%= submit_tag "Search", class: 'btn btn-primary' %>
 <% end %>
 
-
-<div class="hats_class">
-  <% @chihuahuahats.each do |hat| %>
-    <%= link_to chihuahuahat_path(hat) do %>
-      <div class="viewhats">
-        <%= image_tag hat.image, class: "hat" if hat.image.attached? %>
-        <div class="hat-info">
-          <h3><%= hat.title %></h3>
-          <p><%= number_to_currency(hat.price) %></p>
-        </div>
+<div class="container">
+  <div class="row">
+    <% @chihuahuahats.each do |hat| %>
+      <div class="col-md-4 mb-4">
+        <%= link_to chihuahuahat_path(hat) do %>
+          <div class="card">
+            <%= image_tag hat.image, class: "card-img-top" if hat.image.attached? %>
+            <div class="card-body">
+              <h5 class="card-title"><%= hat.title %></h5>
+              <p class="card-text"><%= number_to_currency(hat.price) %></p>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
-  <% end %>
+  </div>
 </div>
-
-
-

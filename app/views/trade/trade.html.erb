@@ -1,14 +1,25 @@
-<h1>Welcome to Trade Page</h1>
-<p>You can put up your old hats for sale here</p>
+<%# app/views/trade/trade.html.erb %>
 
-<p>
-  <%= link_to 'Home', home_path %>
-</p>
+<div class="container mt-4">
+  <h1 class="text-center">Trade Hats</h1>
+  
+  <div class="text-center mt-4 mb-4">
+    <%= link_to 'Submit New Hat', new_trade_path, class: 'btn btn-primary' %>
+  </div>
 
-
-<p class="nav-item">
-
-            <%= button_to 'Sign Out', destroy_user_session_path,
-                        method: :delete, data: { turbo: false }, class: "nav-link  btn btn-link" %>
-       
-</p>
+  <div class="row">
+    <% @hat.each do |hat| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <%= image_tag hat.image, class: "card-img-top" if hat.image.attached? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= hat.title %></h5>
+            <p class="card-text"><%= hat.description %></p>
+            <p class="card-text"><%= number_to_currency(hat.price) %></p>
+            <%= link_to 'View Details', trade_show_path(hat), class: 'btn btn-info' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

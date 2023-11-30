@@ -8,7 +8,7 @@
     </div>
   <% end %>
 
-  <%= form_for @feedback, url: feedbacks_path do |f| %>
+  <%= form_for @feedback, url: new_home_feedback_path do |f| %>
     <div class="mb-3">
       <%= f.label :rating, class: "form-label" %>
       <%= f.select :rating, (1..5).to_a, { prompt: 'Select a rating', required: true }, class: "form-select" %>

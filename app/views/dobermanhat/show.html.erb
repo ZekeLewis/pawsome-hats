@@ -7,37 +7,5 @@
 <p>Description : <%= @hat.description %></p> <!-- Assuming you have a description attribute -->
 <p>Category : <%= @hat.category %></p>
 
- <!-- Hat customization form -->
-<%= form_with model: CartItem.new, url: cart_path, method: :post, local: true do |form| %>
-  <%= form.hidden_field :hat_id, value: @hat.id %>
-
-  <div class="customization-section">
-    <!-- Fit -->
-    <div class="field">
-      <%= form.label :fit, 'Fit:' %>
-      <%= form.select :fit, ['Dog', 'Man', 'Woman'], { prompt: 'Select a fit', required: true }, class: 'form-select' %>
-    </div>
-
-    <!-- Color -->
-    <div class="field">
-      <%= form.label :color, 'Color:' %>
-      <%= form.select :color, ['Blue', 'Black', 'Red', 'Pink', 'Purple'], { prompt: 'Select a color', required: true }, class: 'form-select' %>
-    </div>
-
-    <!-- Material -->
-    <div class="field">
-      <%= form.label :material, 'Material:' %>
-      <%= form.select :material, ['Wool', 'Suede', 'Lood', 'Cotton'], { prompt: 'Select a material', required: true }, class: 'form-select' %>
-    </div>
-
-    <!-- Quantity -->
-    <div class="field">
-      <%= form.label :quantity, 'Quantity:' %>
-      <%= form.number_field :quantity, min: 1, required: true, class: 'form-control' %>
-    </div>
-
-    <!-- Submit button -->
-    <%= link_to "Add to cart", cart_path, class: "btn btn-primary" %>
-  </div>
-<% end %>
+ <td><%= link_to "Add to cart", dobermanhat_add_to_cart_path %></td>
   <td><%= link_to "Back", dobermanindex_path %></td>
