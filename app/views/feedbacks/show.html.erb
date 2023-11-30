@@ -1,0 +1,23 @@
+<!-- app/views/feedbacks/show.html.erb -->
+<div class="container mt-4">
+  <h2 class="mb-4">Feedbacks</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Rating</th>
+        <th>Category</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @feedbacks.each do |feedback| %>
+        <tr>
+          <td><%= feedback.rating %></td>
+          <td><%= feedback.category %></td>
+          <td><%= feedback.details %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+</div>
