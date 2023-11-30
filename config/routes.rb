@@ -38,8 +38,10 @@ Rails.application.routes.draw do
   post 'trade/:id/add_to_cart', to: 'trade#add_to_cart', as: 'add_trade_item_to_cart'
 
   get 'home/feedback', to: 'feedbacks#new', as: 'new_home_feedback'
-post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
+  post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
 
+  get 'checkout', to: 'checkout#new', as: 'new_checkout'
+  post 'checkout/create', to: 'checkout#create', as: 'checkout_create'
 
   # Devise routes for user sign-in, sign-up, sign-out, etc.
   devise_for :users
