@@ -6,6 +6,7 @@
 #  category    :string
 #  description :text
 #  image       :binary
+#  is_trade    :boolean
 #  price       :decimal(, )
 #  title       :string
 #  created_at  :datetime         not null

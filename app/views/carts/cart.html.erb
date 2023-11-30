@@ -23,16 +23,18 @@
             </thead>
             <tbody>
               <% @cart_items.each do |cart_item| %>
-                <tr>
-                  <td><%= cart_item.hat.title %></td>
-                  <td><%= number_to_currency(cart_item.hat.price) %></td>
-                  <td>
-                    <%= button_to 'Remove', remove_cart_item_path(cart_item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
-                  </td>
-                  <td>
-                    <%= image_tag cart_item.hat.image, class: 'img-fluid' if cart_item.hat.image.attached? %>
-                  </td>
-                </tr>
+                <div class="cart-item" data-price="<%= cart_item.hat.price %>">
+                  <tr>
+                    <td><%= cart_item.hat.title %></td>
+                    <td><%= number_to_currency(cart_item.hat.price) %></td>
+                    <td>
+                      <%= button_to 'Remove', remove_cart_item_path(cart_item), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm remove-item-button" %>
+                    </td>
+                    <td>
+                      <%= image_tag cart_item.hat.image, class: 'img-fluid' if cart_item.hat.image.attached? %>
+                    </td>
+                  </tr>
+                </div>
               <% end %>
             </tbody>
           </table>
@@ -46,16 +48,16 @@
           <thead>
             <tr>
               <th colspan="2">Subtotal</th>
-              <th><%= number_to_currency(@subtotal) %></th>
+              <th id="subtotal-value"><%= number_to_currency(@subtotal) %></th>
             </tr>
             <tr>
               <th colspan="2">Taxes (10%)</th>
-              <th><%= number_to_currency(@taxes) %></th>
+              <th id="taxes-value"><%= number_to_currency(@taxes) %></th>
             </tr>
             <!-- Add shipping fee row -->
             <tr>
               <th colspan="2">Shipping</th>
-              <th><%= number_to_currency(@shipping_fee) %></th>
+              <th id="shipping_fee-value"><%= number_to_currency(@shipping_fee) %></th>
             </tr>
             <tr>
               <th colspan="2">Promo Code</th>
@@ -67,12 +69,12 @@
             <!-- Add discount row -->
             <tr>
               <th colspan="2">Discount</th>
-              <th><%= number_to_currency(@discount) %></th>
+              <th id="discount-value"><%= number_to_currency(@discount) %></th>
             </tr>
             <!-- Add total after discount row -->
             <tr>
               <th colspan="2">Total After Discount</th>
-              <th><%= number_to_currency(@total_after_discount) %></th>
+              <th id="total_after_discount-value"><%= number_to_currency(@total_after_discount) %></th>
             </tr>
             
           </thead>
@@ -80,4 +82,50 @@
       </div>
     </div>
   </div>
+
+<%= link_to 'Proceed to Checkout', new_checkout_path, class: 'btn btn-primary' %>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Function to recalculate the cart totals
+  function recalculateCart() {
+    let subtotal = 0;
+    let taxRate = 0.1; // Example tax rate: 10%
+    let shipping_fee = 5.00; 
+    let discount = 0;
+
+    // Calculate subtotal by iterating over each cart item
+    document.querySelectorAll('.cart-item').forEach(item => {
+      let price = parseFloat(item.getAttribute('data-price')); // Assuming each item has data-price attribute
+      subtotal += price;
+    });
+
+    let taxes = subtotal * taxRate;
+    let total = subtotal + taxes;
+    let totalAfterDiscount = subtotal + taxes + shipping_fee - discount;
+
+    // Update the DOM with new values
+    document.getElementById('subtotal-value').innerText = subtotal.toFixed(2);
+    document.getElementById('taxes-value').innerText = taxes.toFixed(2);
+    document.getElementById('shipping_fee-value').innerText = shipping_fee.toFixed(2);
+    document.getElementById('discount-value').innerText = discount.toFixed(2);
+    document.getElementById('total_after_discount-value').innerText = total.toFixed(2);
+  }
+
+  // Add event listeners to cart item add/remove buttons
+  document.querySelectorAll('.add-to-cart, .remove-from-cart').forEach(button => {
+    button.addEventListener('click', function() {
+      // Assuming you handle the add/remove logic elsewhere
+
+      // Recalculate cart after the operation
+      recalculateCart();
+    });
+  });
+
+  // Initial calculation on page load
+  recalculateCart();
+});
+</script>
+
+
 </body>
