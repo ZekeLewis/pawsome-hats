@@ -1,21 +1,28 @@
-<!-- app/views/hats/show.html.erb -->
 <div class="container mt-4">
-  <h1><%= @hat.title %></h1>
+  <h1 class="text-center mb-4"><%= @hat.title %></h1>
 
   <% if @hat.image.attached? %>
-    <div class="text-center">
-      <%= image_tag @hat.image, class: "img-fluid" %>
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4">
+        <div class="d-flex justify-content-center">
+          <%= image_tag @hat.image, class: 'img-fluid' %>
+        </div>
+      </div>
     </div>
   <% end %>
 
-  <div class="my-3">
-    <p><strong>Price:</strong> <%= number_to_currency(@hat.price) %></p>
-    <p><strong>Description:</strong> <%= @hat.description %></p> <!-- Assuming you have a description attribute -->
-    <p><strong>Category:</strong> <%= @hat.category %></p>
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <p><strong>Price:</strong> <%= number_to_currency(@hat.price) %></p>
+      <p><strong>Description:</strong> <%= @hat.description %></p>
+      <p><strong>Color:</strong> <%= @hat.colour %></p>
+      <p><strong>Material:</strong> <%= @hat.material %></p>
+      <p><strong>Category:</strong> <%= @hat.category %></p>
+    </div>
   </div>
 
   <div class="my-3">
-    <%= link_to "Add to cart" , chihuahuahat_add_to_cart_path%>
+    <%= link_to "Add to cart" , chihuahuahat_add_to_cart_path, class: "btn btn-secondary ml-2" %>
     <%= link_to "Back", chihuahuaindex_path, class: "btn btn-secondary ml-2" %>
   </div>
 </div>
