@@ -1,25 +1,25 @@
 # == Schema Information
 #
-# Table name: carts
+# Table name: orders
 #
 #  id         :bigint           not null, primary key
-#  listing    :integer
+#  status     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint
 #
 # Indexes
 #
-#  index_carts_on_user_id  (user_id)
+#  index_orders_on_user_id  (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Cart < ApplicationRecord
-    
-  belongs_to :user
-  # has_many :cart_items, dependent: :destroy
-  has_many :cart_items
-  has_many :hats, through: :cart_items
+require "test_helper"
+
+class OrderTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

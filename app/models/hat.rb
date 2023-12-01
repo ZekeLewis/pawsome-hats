@@ -8,6 +8,7 @@
 #  description :text
 #  image       :binary
 #  material    :string
+#  is_trade    :boolean
 #  price       :decimal(, )
 #  title       :string
 #  created_at  :datetime         not null
@@ -23,7 +24,7 @@
 #  fk_rails_...  (cart_id => carts.id)
 #
 class Hat < ApplicationRecord
-    has_one_attached :image, :dependent => :destroy
+  has_one_attached :image, :dependent => :destroy
 
     has_many(
         :cart_items,

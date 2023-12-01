@@ -26,7 +26,7 @@ user1 = User.create!(
   isvendor: 'y'
 )
 
-# Creating hats for the Doberman category
+
 doberman_hat1 = Hat.create!(
   title: 'Classic Doberman Hat',
   price: 15.99,

@@ -5,10 +5,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: redirect('/home')
-  resources :feedbacks, only: [:new, :create]
+  resources :feedbacks, only: [:new, :create, :show]
+
   get 'home', to: 'home#show', as: 'home'
-  get 'home/cart', to: 'cart#cart' , as: 'cart'
-  get 'home/trade', to: 'trade#trade' , as: 'trade'
+
   get 'home/order', to: 'order#order' , as: 'order'
   get 'home/custom-hat', to: 'custom#custom' , as: 'custom'
   
@@ -40,13 +40,33 @@ Rails.application.routes.draw do
   delete 'home/dobermanhat/:id', to: 'dobermanhat#destroy'
   get 'home/dobermanhat/:id', to: 'dobermanhat#show', as: 'dobermanhat'
 
-get 'home/feedback', to: 'feedbacks#new', as: 'new_home_feedback'
-post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
+  #add to cart
+  get 'home/dobermanhat/:id/add_to_cart', to: 'dobermanhat#add_to_cart', as: 'dobermanhat_add_to_cart'
+  get 'home/poodlehat/:id/add_to_cart', to: 'poodlehat#add_to_cart', as: 'poodle_add_to_cart'
+  get 'home/chihuahuahat/:id/add_to_cart', to: 'chihuahuahat#add_to_cart', as: 'chihuahuahat_add_to_cart'
 
-get 'cart/review', to: 'cart#review', as: 'review_cart'
-post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'apply_promo_code'
+  get 'cart/review', to: 'carts#review', as: 'review_cart'
+  delete 'cart/review/:id', to: 'carts#destroy', as: 'remove_cart_item'
+  post 'home/dobermanhat/:id/cart/add_item/:id', to: 'carts#add_item', as: 'add_item_to_cart'
+  post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'apply_promo_code'
 
 
+  get 'trade', to: 'trade#trade', as: 'trade'
+  get 'trade/new', to: 'trade#new', as: 'new_trade'
+  post 'trade', to: 'trade#create'
+  get 'trade/:id', to: 'trade#show', as: 'trade_show'
+  delete 'trade/:id', to: 'trade#destroy'
+
+  post 'trade/:id/add_to_cart', to: 'trade#add_to_cart', as: 'add_trade_item_to_cart'
+
+  get 'home/feedback/show', to: 'feedbacks#show', as: 'show_feedback'
+  get 'home/feedback', to: 'feedbacks#new', as: 'new_home_feedback'
+  post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
+
+
+
+  get 'checkout', to: 'checkout#new', as: 'new_checkout'
+  post 'checkout/create', to: 'checkout#create', as: 'checkout_create'
 
   # Devise routes for user sign-in, sign-up, sign-out, etc.
   devise_for :users
