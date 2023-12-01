@@ -6,14 +6,6 @@
   <div class="container">
     <h1>Checkout</h1>
 
-    <%# Display an order summary %>
-    <div class="order-summary">
-      <h2>Your Order</h2>
-      <p><strong>Subtotal:</strong> <%= number_to_currency(@subtotal) %></p>
-      <p><strong>Taxes:</strong> <%= number_to_currency(@taxes) %></p>
-      <p><strong>Total:</strong> <%= number_to_currency(@total) %></p>
-    </div>
-
     <%# Payment Information Form %>
     <%= form_with(model: Order.new, url: checkout_create_path, method: :post, local: true) do |form| %>
       <div class="payment-information">
