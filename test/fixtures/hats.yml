@@ -4,9 +4,11 @@
 #
 #  id          :bigint           not null, primary key
 #  category    :string
+#  colour      :string
 #  description :text
 #  image       :binary
 #  is_trade    :boolean
+#  material    :string
 #  price       :decimal(, )
 #  title       :string
 #  created_at  :datetime         not null
