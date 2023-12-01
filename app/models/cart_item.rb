@@ -21,5 +21,4 @@
 class CartItem < ApplicationRecord
   belongs_to :cart
   belongs_to :hat
-  belongs_to :user
 end

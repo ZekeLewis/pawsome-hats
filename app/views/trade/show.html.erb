@@ -7,5 +7,5 @@
   <%= button_to 'Add to Cart', add_trade_item_to_cart_path(id: @hat.id), method: :post, class: 'btn btn-success' %>
   <%= button_to "Delete", trade_show_path(@hat.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
-  <%= link_to 'Back to Trade Hats', trade_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Back to Trade Hats', trade_path, class: 'btn btn-secondary' %>
 </div>
