@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'home', to: 'home#show', as: 'home'
   # get 'home/cart', to: 'cart#cart' , as: 'cart'
 
-  get 'home/order', to: 'order#order' , as: 'order'
+  #get 'home/order', to: 'order#order' , as: 'order'
   get 'home/custom-hat', to: 'custom#new' , as: 'custom'
   post 'home/custom-hat', to: 'custom#create'
 
@@ -70,6 +70,9 @@ Rails.application.routes.draw do
   
   get 'checkout', to: 'checkout#new', as: 'new_checkout'
   post 'checkout/create', to: 'checkout#create', as: 'checkout_create'
+
+  get 'order', to: 'order#orderhistory' , as: 'order_history'
+  get 'order/:id', to: 'order#show', as: 'order_show'
 
   # Devise routes for user sign-in, sign-up, sign-out, etc.
   devise_for :users

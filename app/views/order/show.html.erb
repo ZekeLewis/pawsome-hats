@@ -1,0 +1,15 @@
+<%# app/views/orders/show.html.erb %>
+
+<div class="container mt-4">
+  <h2>Order Details</h2>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Order ID: <%= @order.id %></h5>
+      <p class="card-text">Order Date: <%= @order.created_at.strftime("%d %b %Y %H:%M") %></p>
+      <!-- Add more order details if needed -->
+    </div>
+  </div>
+
+  <h3>Items in this Order</h3>
+</div>
