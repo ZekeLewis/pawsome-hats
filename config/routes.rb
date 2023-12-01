@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   get 'home', to: 'home#show', as: 'home'
 
   get 'home/order', to: 'order#order' , as: 'order'
-  get 'home/custom-hat', to: 'custom#custom' , as: 'custom'
-  
+  get 'home/custom-hat', to: 'custom#new' , as: 'custom'
+  post 'home/custom-hat', to: 'custom#create'
+
   get 'home/poodlehat', to: 'poodlehat#index', as: 'poodleindex'
   get 'home/poodlehat/new', to: 'poodlehat#new', as: 'new_poodlehat'
   post 'home/poodlehat/new', to: 'poodlehat#create'
@@ -64,7 +65,9 @@ Rails.application.routes.draw do
   post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
 
 
-
+  post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'cart_apply_promo_code'
+  post '/apply_promo_code', to: 'shopping_cart#apply_promo_code', as: :shopping_cart_apply_promo_code
+  
   get 'checkout', to: 'checkout#new', as: 'new_checkout'
   post 'checkout/create', to: 'checkout#create', as: 'checkout_create'
 
