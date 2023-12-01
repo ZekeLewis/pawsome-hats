@@ -23,6 +23,7 @@ class CartsController < ApplicationController
       else
         redirect_to @hat, alert: 'Failed to add package to cart.'
       end
+
     end
 
     def destroy
@@ -48,6 +49,28 @@ class CartsController < ApplicationController
     @cart = current_user.cart || current_user.create_cart
   end
   def initialize_cart
-      @cart = current_user.cart || current_user.create_cart
+    @cart = current_user.cart || current_user.create_cart
     end
+    
+  def apply_promo_code
+    promo_code = params[:promo_code]
+
+    case promo_code
+    when '10OFF'
+      @discount = @cart.subtotal * 0.10
+    when '15OFF'
+      @discount = @cart.subtotal * 0.15
+    when '20OFF'
+      @discount = @cart.subtotal * 0.20
+    else
+      @discount = 0
+    end
+
+    @cart.calculate_totals_with_discount(@discount)
+
+    respond_to do |format|
+      format.js { render partial: 'update_cart_totals' }
+    end
+  end
+
 end
