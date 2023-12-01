@@ -4,8 +4,10 @@
 #
 #  id          :bigint           not null, primary key
 #  category    :string
+#  colour      :string
 #  description :text
 #  image       :binary
+#  material    :string
 #  price       :decimal(, )
 #  title       :string
 #  created_at  :datetime         not null
@@ -32,5 +34,6 @@ class Hat < ApplicationRecord
       )
      
       has_many :carts, through: :cart_items
+      validates :title, :price, :description, :colour, :material, :category, presence: true
     
 end
