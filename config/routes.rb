@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   # get 'home/cart', to: 'cart#cart' , as: 'cart'
 
   get 'home/order', to: 'order#order' , as: 'order'
-  get 'home/custom-hat', to: 'custom#custom' , as: 'custom'
+  get 'home/custom-hat', to: 'custom#new' , as: 'custom'
+  post 'home/custom-hat', to: 'custom#create'
+
   get 'home/poodlehat', to: 'poodlehat#index', as: 'poodleindex'
   get 'home/poodlehat/:id', to: 'poodlehat#show', as: 'poodlehat'
   get 'home/chihuahuahat', to: 'chihuahuahat#index', as: 'chihuahuaindex'

@@ -1,6 +1,5 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
-  before_action :initialize_cart
   before_action :set_current_cart
 
   def show
@@ -9,9 +8,7 @@ class CartsController < ApplicationController
     @cart_items = @cart.cart_items.includes(:hat)
   end
   
-  def set_current_cart
-      @current_cart = current_user.cart if user_signed_in?
-    end
+ 
     
     def add_item
       @cart = current_user.cart
@@ -48,9 +45,7 @@ class CartsController < ApplicationController
   def set_current_cart
     @cart = current_user.cart || current_user.create_cart
   end
-  def initialize_cart
-    @cart = current_user.cart || current_user.create_cart
-    end
+ 
     
   def apply_promo_code
     promo_code = params[:promo_code]

@@ -1,7 +1,8 @@
 <div class="container mt-4">
   <h1 class="text-center">Submit New Hat</h1>
 
-  <%= form_with(model: @hat, url: trade_path, local: true, class: 'mt-4', multipart: true) do |form| %>
+  <%= form_with(model: @hat, url: custom_path, local: true, class: 'mt-4', multipart: true) do |form| %>
+    <%= form.hidden_field :price, value: '15.99' %>
     <div class="mb-3">
       <%= form.label :title, class: 'form-label' %>
       <%= form.text_field :title, class: 'form-control' %>
@@ -10,11 +11,6 @@
     <div class="mb-3">
       <%= form.label :description, class: 'form-label' %>
       <%= form.text_area :description, class: 'form-control' %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :price, class: 'form-label' %>
-      <%= form.number_field :price, step: '0.01', class: 'form-control' %>
     </div>
 
 
