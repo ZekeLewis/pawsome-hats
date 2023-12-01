@@ -4,8 +4,10 @@
 #
 #  id          :bigint           not null, primary key
 #  category    :string
+#  colour      :string
 #  description :text
 #  image       :binary
+#  material    :string
 #  is_trade    :boolean
 #  price       :decimal(, )
 #  title       :string
@@ -24,14 +26,15 @@
 class Hat < ApplicationRecord
   has_one_attached :image, :dependent => :destroy
 
-  has_many(
-      :cart_items,
-      class_name: 'CartItem',
-      foreign_key: 'hat_id',
-      inverse_of: :hat,
-      dependent: :destroy
-    )
-   
-    has_many :carts, through: :cart_items
-    validates :title, :description, :price, presence: true
+    has_many(
+        :cart_items,
+        class_name: 'CartItem',
+        foreign_key: 'hat_id',
+        inverse_of: :hat,
+        dependent: :destroy
+      )
+     
+      has_many :carts, through: :cart_items
+      validates :title, :price, :description, :colour, :material, :category, presence: true
+    
 end

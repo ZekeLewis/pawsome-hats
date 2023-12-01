@@ -1,35 +1,57 @@
+<%# app/views/home/index.html.erb %>
 
-<body class=" .bg-light.bg-gradient">
-<div class="container mt-4 ">
-  <h1 class="text-center">Welcome to the Dog Hat Store!</h1>
-  <h2 class="text-center mb-4">Hats Collection</h2>
+<h1 class="text-center my-4">Welcome to the Dog Hat Store!</h1>
 
-  <%= form_with(url: home_path, method: :get, local: true, class: 'form-inline justify-content-center mb-4') do |form| %>
-    <%= form.label :category, 'Filter by Category:', class: 'mr-2' %>
-    <%= form.select :category, Hat.distinct.pluck(:category), { include_blank: true }, { class: 'form-control mr-2' } %>
+<h2 class="text-center my-4">Hats Collection</h2>
+
+<div class="d-flex justify-content-center my-4">
+  <%= form_with(url: '#', id: 'category_form', method: :get, local: true, class: "form-inline") do |form| %>
+    <div class="form-group mr-2">
+      <%= form.label :category, 'Filter by Category:', class: 'mr-2' %>
+      <%= form.select :category, ['Doberman', 'Chihuahua', 'Poodle'], { include_blank: true }, id: 'category_select', class: 'form-control' %>
+    </div>
     <%= form.submit 'Filter Hats', class: 'btn btn-primary' %>
   <% end %>
+</div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('category_form');
+    var categorySelect = document.getElementById('category_select');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting via the browser
+
+      var selectedCategory = categorySelect.value;
+      var path;
+
+      if (selectedCategory === 'Doberman') {
+        path = '<%= dobermanindex_path %>';
+      } else if (selectedCategory === 'Chihuahua') {
+        path = '<%= chihuahuaindex_path %>';
+      } else if (selectedCategory === 'Poodle') {
+        path = '<%= poodleindex_path %>';
+      }
+
+      if (path) {
+        window.location.href = path;
+      }
+    });
+  });
+</script>
+
+
+<div class="container">
   <div class="row">
-    <% @hats.each do |hat| %>
-     <% first_part_of_title = hat.title.split(' ').first.downcase %>
-    <% path_helper = "#{first_part_of_title}index_path" %>
+    <% ['doberman', 'chihuahua', 'poodle'].each do |category_name| %>
+      <% path_helper = "#{category_name}index_path" %>
       <div class="col-md-4 mb-4">
-        <%= link_to send(path_helper) do %>
-          <div class="card">
-            <% if hat.image.attached? %>
-              <div class="card-img-top img-fluid" style="background: url('<%= url_for(hat.image) %>') no-repeat center center; background-size: cover; height: 200px;">
-                <!-- Image background -->
-              </div>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= hat.title %></h5>
-              <p class="card-text">Category: <%= hat.category %></p>
-            </div>
+        <%= link_to send(path_helper), class: "card h-100 text-decoration-none text-light" do %>
+           <%= image_tag "placeholder_#{category_name}.webp", alt: "#{category_name.capitalize} Hat", class: "card-img-top" %>
+          <div class="card-body">
+            <h5 class="card-title text-center"><%= "#{category_name.capitalize} Hats" %></h5>
           </div>
         <% end %>
       </div>
     <% end %>
-  </div>
 </div>
-</body>

@@ -8,17 +8,37 @@ Rails.application.routes.draw do
   resources :feedbacks, only: [:new, :create, :show]
 
   get 'home', to: 'home#show', as: 'home'
-  # get 'home/cart', to: 'cart#cart' , as: 'cart'
 
   get 'home/order', to: 'order#order' , as: 'order'
   get 'home/custom-hat', to: 'custom#new' , as: 'custom'
   post 'home/custom-hat', to: 'custom#create'
 
   get 'home/poodlehat', to: 'poodlehat#index', as: 'poodleindex'
+  get 'home/poodlehat/new', to: 'poodlehat#new', as: 'new_poodlehat'
+  post 'home/poodlehat/new', to: 'poodlehat#create'
+  get 'home/poodlehat/:id/edit', to: 'poodlehat#edit', as: 'edit_poodlehat'
+  patch 'home/poodlehat/:id', to: 'poodlehat#update'
+  put 'home/poodlehat/:id', to: 'poodlehat#update'
+  delete 'home/poodlehat/:id', to: 'poodlehat#destroy'
   get 'home/poodlehat/:id', to: 'poodlehat#show', as: 'poodlehat'
+
   get 'home/chihuahuahat', to: 'chihuahuahat#index', as: 'chihuahuaindex'
+  get 'home/chihuahuahat/new', to: 'chihuahuahat#new', as: 'new_chihuahuahat'
+  post 'home/chihuahuahat/new', to: 'chihuahuahat#create'
+  get 'home/chihuahuahat/:id/edit', to: 'chihuahuahat#edit', as: 'edit_chihuahuahat'
+  patch 'home/chihuahuahat/:id', to: 'chihuahuahat#update'
+  put 'home/chihuahuahat/:id', to: 'chihuahuahat#update'
+  delete 'home/chihuahuahat/:id', to: 'chihuahuahat#destroy'
   get 'home/chihuahuahat/:id', to: 'chihuahuahat#show', as: 'chihuahuahat'
+
+
   get 'home/dobermanhat', to: 'dobermanhat#index', as: 'dobermanindex'
+  get 'home/dobermanhat/new', to: 'dobermanhat#new', as: 'new_dobermanhat'
+  post 'home/dobermanhat/new', to: 'dobermanhat#create'
+  get 'home/dobermanhat/:id/edit', to: 'dobermanhat#edit', as: 'edit_dobermanhat'
+  patch 'home/dobermanhat/:id', to: 'dobermanhat#update'
+  put 'home/dobermanhat/:id', to: 'dobermanhat#update'
+  delete 'home/dobermanhat/:id', to: 'dobermanhat#destroy'
   get 'home/dobermanhat/:id', to: 'dobermanhat#show', as: 'dobermanhat'
 
   #add to cart
@@ -53,5 +73,6 @@ Rails.application.routes.draw do
 
   # Devise routes for user sign-in, sign-up, sign-out, etc.
   devise_for :users
+
 
 end
