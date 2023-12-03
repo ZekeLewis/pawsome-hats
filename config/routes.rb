@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'home', to: 'home#show', as: 'home'
   # get 'home/cart', to: 'cart#cart' , as: 'cart'
 
-  #get 'home/order', to: 'order#order' , as: 'order'
+  #get 'home/order', to: 'order#order' , as: 'orderhistory'
   get 'home/custom-hat', to: 'custom#new' , as: 'custom'
   post 'home/custom-hat', to: 'custom#create'
 

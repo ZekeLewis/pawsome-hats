@@ -5,7 +5,7 @@ class CartsController < ApplicationController
   def show
       render :show
     @cart = current_user.cart
-    @cart_items = @cart.cart_items.includes(:hat)
+    @cart_items = @current_cart.cart_items.includes(:hat)
   end
   
  
@@ -13,7 +13,13 @@ class CartsController < ApplicationController
     def add_item
       @cart = current_user.cart
       @hat = Hat.find(params[:hat_id])
-      @cart_item = @cart.cart_items.build(hat: @hat, quantity: 1)
+      @cart_item = @current_cart.cart_items.find_or_initialize_by(hat: @hat)
+
+      if @cart_item.new_record?
+        @cart_item.quantity = 1
+      else
+        @cart_item.quantity += 1
+      end
   
       if @cart_item.save
         redirect_to cart_path, notice: 'Package added to cart successfully.'
@@ -24,7 +30,7 @@ class CartsController < ApplicationController
     end
 
     def destroy
-      cart_item = CartItem.find_by(id: params[:id])
+      cart_item = @current_cart.cart_items.find_by(id: params[:id])
       if cart_item.destroy
         flash[:notice] = 'Item removed successfully'
       else
@@ -36,14 +42,14 @@ class CartsController < ApplicationController
 
 
     def review
-      @cart_items = CartItem.all
+      @cart_items = @current_cart.cart_items.includes(:hat)
       render :cart
     end
 
   private
 
   def set_current_cart
-    @cart = current_user.cart || current_user.create_cart
+    @current_cart = current_user.cart || current_user.create_cart
   end
  
     

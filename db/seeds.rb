@@ -20,7 +20,7 @@ user2 = User.create!(
   password: 'password',
   isvendors: 'n'
 )
-user1 = User.create!(
+user3 = User.create!(
   email:    'tara@email.com',
   password: 'password',
   isvendors: 'y'

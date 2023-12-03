@@ -1,9 +1,9 @@
 <%# app/views/orders/show.html.erb %>
 
 <div class="container mt-4">
-  <h2>Order Details</h2>
+  <h2 class="mb-4 text-center text-uppercase font-weight-bold">Order Details</h2>
 
-  <div class="card mb-3">
+  <div class="card mb-3 shadow-lg">
     <div class="card-body">
       <h5 class="card-title">Order ID: <%= @order.id %></h5>
       <p class="card-text">Order Date: <%= @order.created_at.strftime("%d %b %Y %H:%M") %></p>
@@ -11,5 +11,24 @@
     </div>
   </div>
 
-  <h3>Items in this Order</h3>
+  <h3 class="text-center mb-3 text-uppercase font-weight-bold">Items in this Order</h3>
+  <div class="row">
+    <% @order_items.each do |item|%>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <%= image_tag item.hat.image, class: "card-img-top" if item.hat.image.attached? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= item.hat.title %></h5>
+            <p class="card-text"><%= item.hat.description %></p>
+            <p class="card-text">Price: $ <%= item.hat.price %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 'Back to Order History' button outside of the loop -->
+  <div class="text-center mt-4">
+    <%= link_to 'Back to Order History', order_history_path, class: 'btn btn-primary' %>
+  </div>
 </div>
