@@ -12,8 +12,6 @@
           <tr>
             <th>Order ID</th>
             <th>Date</th>
-            <th>Quantity</th>
-            <th>Total</th>
             <th></th>
 
             <!-- Add other columns as necessary -->
@@ -24,8 +22,6 @@
             <tr>
               <td><%= order.id %></td>
               <td><%= order.created_at.strftime("%d %b %Y %H:%M") %></td>
-              <td></td>
-              <td></td>
               <td><%= link_to 'Details', order_show_path(order), class: 'btn btn-primary'%></td>
             </tr>
           <% end %>

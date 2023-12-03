@@ -1,11 +1,22 @@
-<div class="container mt-4">
-  <h1><%= @hat.title %></h1>
-  <%= image_tag @hat.image, class: "img-fluid" if @hat.image.attached? %>
-  <p><%= @hat.description %></p>
-  <p><%= number_to_currency(@hat.price) %></p>
-
-  <%= button_to 'Add to Cart', add_trade_item_to_cart_path(id: @hat.id), method: :post, class: 'btn btn-success' %>
-  <%= button_to "Delete", trade_show_path(@hat.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-
-  <%= link_to 'Back to Trade Hats', trade_path, class: 'btn btn-secondary' %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 col-lg-6 mx-auto">
+      <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white">
+          <h1 class="card-title text-center mb-0"><%= @hat.title %></h1>
+        </div>
+        <div class="card-body">
+          <% if @hat.image.attached? %>
+            <%= image_tag @hat.image, class: "img-fluid rounded mb-3" %>
+          <% end %>
+          <p class="card-text"><%= @hat.description %></p>
+          <p class="card-text font-weight-bold"><%= number_to_currency(@hat.price) %></p>
+        </div>
+        <div class="card-footer bg-white d-grid gap-2">
+          <%= button_to 'Add to Cart', add_trade_item_to_cart_path(id: @hat.id), method: :post, class: 'btn btn-success' %>
+          <%= link_to 'Back to Trade Hats', trade_path, class: 'btn btn-outline-secondary' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -14,6 +14,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  cart_id     :bigint
+#  user_id     :integer
 #
 # Indexes
 #
@@ -25,6 +26,7 @@
 #
 class Hat < ApplicationRecord
   has_one_attached :image, :dependent => :destroy
+ # belongs_to :user
 
   has_many(
       :cart_items,

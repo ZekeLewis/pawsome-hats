@@ -23,14 +23,16 @@
           <%= link_to 'Custom-HAT', custom_path, class: "nav-link #{active_class(custom_path)}" %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Cart', review_cart_path, class: "nav-link #{active_class(review_cart_path)}" %>
-        </li>
-        <li class="nav-item">
           <%= link_to 'Orders', order_history_path, class: "nav-link #{active_class(order_history_path)}" %>
         </li>
         <li class="nav-item">
           <%= link_to 'Feedback', new_home_feedback_path, class: "nav-link #{active_class(new_home_feedback_path)}" %>
         </li>
+<li class="nav-item">
+  <%= link_to review_cart_path, class: "nav-link #{active_class(review_cart_path)}" do %>
+    <%= image_tag('cart.png', alt: 'Cart', class: 'navbar-cart-icon') %> Cart
+  <% end %>
+</li>
       </ul>
 
  

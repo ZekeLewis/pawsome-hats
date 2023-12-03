@@ -9,6 +9,7 @@ class TradeController < ApplicationController
 
   def create
     @hat = Hat.new(hat_params)
+   # @hat.user = current_user
     @hat.is_trade = true  # Set is_trade to true for hats added through trade
   
     if @hat.save
@@ -23,12 +24,18 @@ class TradeController < ApplicationController
   end
 
 
-  def destroy
-    @hat = Hat.find(params[:id])
-    @hat.destroy
-    flash[:success] = 'The hat item was successfully destroyed.'
-    redirect_to trade_path, status: :see_other
-  end
+  # def destroy
+  #   @hat = Hat.find(params[:id])
+  
+  #   if @hat.destroy
+  #     flash[:success] = 'The hat item was successfully destroyed.'
+  #   else
+  #     flash[:alert] = 'There was a problem deleting the hat.'
+  #   end
+    
+  #   redirect_to trade_path, status: :see_other
+  # end
+  
 
   def show
     @hat = Hat.find_by(id: params[:id])
