@@ -43,51 +43,53 @@
         <% end %>
       </div>
 
-      <!-- Cart summary on the right -->
-      <div class="col-md-6">
-        <h3>Cart Summary</h3>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th colspan="2">Cart Item Total</th>
-              <th id="subtotal-value"><%= number_to_currency(@subtotal) %></th>
-            </tr>
-            <tr>
-              <th colspan="2">Taxes (10%)</th>
-              <th id="taxes-value"><%= number_to_currency(@taxes) %></th>
-            </tr>
-            <!-- Add shipping fee row -->
-            <tr>
-              <th colspan="2">Shipping</th>
-              <th id="shipping_fee-value"><%= number_to_currency(@shipping_fee) %></th>
-            </tr>
-            <!-- Add total before discount row -->
-            <tr>
-              <th colspan="2">Total Amount</th>
-              <th id="total_before_discount-value"><%= number_to_currency((@subtotal.to_f + @taxes.to_f + @shipping_fee.to_f).to_f) %></th>
-            </tr>
+      <!-- Cart summary on the right (conditionally rendered) -->
+      <% unless @cart_items.empty? %>
+        <div class="col-md-6">
+          <h3>Cart Summary</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th colspan="2">Cart Item Total</th>
+                <th id="subtotal-value"><%= number_to_currency(@subtotal) %></th>
+              </tr>
+              <tr>
+                <th colspan="2">Taxes (10%)</th>
+                <th id="taxes-value"><%= number_to_currency(@taxes) %></th>
+              </tr>
+              <!-- Add shipping fee row -->
+              <tr>
+                <th colspan="2">Shipping</th>
+                <th id="shipping_fee-value"><%= number_to_currency(@shipping_fee) %></th>
+              </tr>
+              <!-- Add total before discount row -->
+              <tr>
+                <th colspan="2">Total Amount</th>
+                <th id="total_before_discount-value"><%= number_to_currency((@subtotal.to_f + @taxes.to_f + @shipping_fee.to_f).to_f) %></th>
+              </tr>
 
-            <!-- Add promo code apply row -->
-            <tr>
-              <th colspan="2">Promo Code</th>
-              <th>
-                <%= text_field_tag :promo_code, nil, id: 'promo_code' %>
-                <button id="apply-promo-code-btn" class="btn btn-primary">Apply</button>
-              </th>
-            </tr>
-            <!-- Add discount row -->
-            <tr>
-              <th colspan="2">Discount</th>
-              <th id="discount-value"><%= number_to_currency(@discount.to_f) %></th>
-            </tr>
-            <!-- Add total after discount row -->
-            <tr>
-              <th colspan="2">Total After Discount</th>
-              <th id="total_after_discount-value"><%= number_to_currency(@total_after_discount.to_f) %></th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+              <!-- Add promo code apply row -->
+              <tr>
+                <th colspan="2">Promo Code</th>
+                <th>
+                  <%= text_field_tag :promo_code, nil, id: 'promo_code' %>
+                  <button id="apply-promo-code-btn" class="btn btn-primary">Apply</button>
+                </th>
+              </tr>
+              <!-- Conditionally show discount row -->
+              <tr id="discount-row" style="display: none;">
+                <th colspan="2">Discount</th>
+                <th id="discount-value"><%= number_to_currency(@discount.to_f) %></th>
+              </tr>
+              <!-- Conditionally show total after discount row -->
+              <tr id="total-after-discount-row" style="display: none;">
+                <th colspan="2">Total After Discount</th>
+                <th id="total_after_discount-value"><%= number_to_currency(@total_after_discount.to_f) %></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      <% end %>
     </div>
   </div>
 
@@ -98,13 +100,19 @@
       function recalculateCart() {
         let subtotal = 0;
         let taxRate = 0.1; // Example tax rate: 10%
-        let shipping_fee = 5.00;
+        let shipping_fee = 0; // Set the default shipping fee to 0
         let discount = parseFloat(document.getElementById('discount-value').innerText) || 0;
 
-        document.querySelectorAll('.cart-item').forEach(item => {
-          let price = parseFloat(item.getAttribute('data-price'));
-          subtotal += price;
-        });
+        // Check if there are cart items
+        let cartItems = document.querySelectorAll('.cart-item');
+        if (cartItems.length > 0) {
+          cartItems.forEach(item => {
+            let price = parseFloat(item.getAttribute('data-price'));
+            subtotal += price;
+          });
+
+          shipping_fee = 5.00; // Set the shipping fee if there are items in the cart
+        }
 
         let taxes = subtotal * taxRate;
         let totalAfterDiscount = subtotal + taxes + shipping_fee - discount;
@@ -132,9 +140,17 @@
           // Calculate discount based on the subtotal of cart items
           let discount = subtotal * discountPercentage;
           document.getElementById('discount-value').innerText = discount.toFixed(2);
+
+          // Show discount and total after discount rows
+          document.getElementById('discount-row').style.display = 'table-row';
+          document.getElementById('total-after-discount-row').style.display = 'table-row';
         } else {
           // Handle invalid promo code or reset discount
           document.getElementById('discount-value').innerText = '0.00';
+
+          // Hide discount and total after discount rows
+          document.getElementById('discount-row').style.display = 'none';
+          document.getElementById('total-after-discount-row').style.display = 'none';
         }
 
         recalculateCart();
@@ -145,10 +161,7 @@
         applyPromoCode();
       });
 
-      // Recalculate the cart on page load
       recalculateCart();
-
-      // Automatically reload cart totals every second
       setInterval(recalculateCart, 1000);
     });
   </script>

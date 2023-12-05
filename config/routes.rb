@@ -63,10 +63,11 @@ Rails.application.routes.draw do
   get 'home/feedback/show', to: 'feedbacks#show', as: 'show_feedback'
   get 'home/feedback', to: 'feedbacks#new', as: 'new_home_feedback'
   post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
-
+  resources :carts do
+    post 'apply_promo_code', on: :member
+  end
 
   post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'cart_apply_promo_code'
-  post '/apply_promo_code', to: 'shopping_cart#apply_promo_code', as: :shopping_cart_apply_promo_code
   
   get 'checkout', to: 'checkout#new', as: 'new_checkout'
   post 'checkout/create', to: 'checkout#create', as: 'checkout_create'
