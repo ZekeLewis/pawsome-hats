@@ -5,16 +5,17 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new
   end
 
-  def create
-    @feedback = Feedback.new(feedback_params)
-    if @feedback.save
-      flash[:notice] = 'Thank you for your valuable Feedback!'
-      redirect_to feedbacks_url
-    else
-      flash.now[:error] = 'Please fill out all required fields.'
-      render 'new', status: :unprocessable_entity
-    end
+def create
+  @feedback = Feedback.new(feedback_params)
+  if @feedback.save
+    flash[:notice] = 'Thank you for your valuable Feedback!'
+    redirect_to new_home_feedback_path  
+  else
+    flash.now[:error] = 'Please fill out all required fields.'
+    render 'new', status: :unprocessable_entity
   end
+end
+
 
   def index
     @feedbacks = Feedback.all

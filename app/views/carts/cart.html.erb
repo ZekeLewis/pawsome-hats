@@ -93,7 +93,7 @@
     </div>
   </div>
 
-  <%= link_to 'Proceed to Checkout', new_checkout_path, class: 'btn btn-primary' %>
+<%= link_to 'Proceed to Checkout', new_checkout_path, class: 'btn btn-primary' if @cart_items.present? %>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
