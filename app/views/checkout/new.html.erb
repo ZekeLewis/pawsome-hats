@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Checkout</title>
+  <title>Checkout and Payment</title>
   <!-- Include Bootstrap CSS -->
 </head>
 <body>
   <div class="container mt-5">
-    <h1 class="text-center mb-4">Checkout</h1>
+    <h1 class="text-center mb-4">Checkout and Payment</h1>
 
     <%= form_with(model: Order.new, url: checkout_create_path, method: :post, local: true, class: "needs-validation", novalidate: true) do |form| %>
       <div class="payment-information">
