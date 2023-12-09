@@ -13,8 +13,32 @@
       <%= form.text_area :description, class: 'form-control' %>
     </div>
 
+  <div class="mb-3">
+      <label class="form-label">Color</label>
+      <%= radio_button_tag 'color', 'Red', false, class: 'option-group color-option' %> Red
+      <%= radio_button_tag 'color', 'Green', false, class: 'option-group color-option' %> Green
+      <%= radio_button_tag 'color', 'Blue', false, class: 'option-group color-option' %> Blue
+    </div>
 
-     <div class="mb-3">
+  <div class="mb-3">
+      <label class="form-label">Size</label>
+      <%= radio_button_tag 'size', 'Small', false, class: 'option-group size-option' %> Small
+      <%= radio_button_tag 'size', 'Medium', false, class: 'option-group size-option' %> Medium
+      <%= radio_button_tag 'size', 'Large', false, class: 'option-group size-option' %> Large
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Material</label>
+      <%= radio_button_tag 'material', 'Cotton', false, class: 'option-group material-option' %> Cotton
+      <%= radio_button_tag 'material', 'Wool', false, class: 'option-group material-option' %> Wool
+      <%= radio_button_tag 'material', 'Suede', false, class: 'option-group material-option' %> Suede
+      <%= radio_button_tag 'material', 'Synthetic', false, class: 'option-group material-option' %> Synthetic
+    </div>
+
+    
+
+
+  <div class="mb-3">
     <%= form.label :image, class: 'form-label' %>
     <%= form.file_field :image, class: 'form-control', id: 'image-upload', direct_upload: true %>
     <img id="image-preview" class="mt-3" style="max-width: 100%; height: auto; display: none;" />
@@ -26,22 +50,4 @@
   <% end %>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('image-preview').src = e.target.result;
-          document.getElementById('image-preview').style.display = 'block';
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    document.getElementById('image-upload').addEventListener('change', function() {
-      readURL(this);
-    });
-  });
-</script>
 
