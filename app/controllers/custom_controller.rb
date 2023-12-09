@@ -12,12 +12,12 @@ class CustomController < ApplicationController
   def create
     @hat = Hat.new(hat_params)
     if @hat.save
-      # Assuming there is a current_user method available,
-      # and each user has a cart associated with them.
+      
       current_user.cart.hats << @hat
-      # Redirect to the cart review path or any other desired path
+      
       redirect_to review_cart_path, notice: 'Hat successfully added to cart.'
     else
+      flash[:error] = 'Error occured while saving custom item'
       render :new
     end
   end
