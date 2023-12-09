@@ -17,6 +17,7 @@ class CustomController < ApplicationController
       
       redirect_to review_cart_path, notice: 'Hat successfully added to cart.'
     else
+      flash[:error] = 'Error occured while saving custom item'
       render :new
     end
   end
