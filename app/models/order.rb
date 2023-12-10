@@ -29,7 +29,17 @@ class Order < ApplicationRecord
 
     before_create :set_default_status
 
-  private
+    after_create :decrease_hat_quantities
+
+    private
+  
+    def decrease_hat_quantities
+      order_items.each do |item|
+        item.hat.decrement!(:quantity, item.quantity) if item.hat.quantity.present?
+      end
+    end
+
+  
 
   def set_default_status
     self.status ||= 'pending'

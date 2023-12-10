@@ -11,24 +11,40 @@ class CheckoutController < ApplicationController
     @total = @subtotal + @taxes + @shipping
   end
 
+  # def create
+  #   @order = current_user.orders.build(order_params.merge(status: 'pending'))
+  
+  #     if @order.save
+  #       current_user.cart.cart_items.all.each do |item|
+  #         #OrderItem.create(order: @order, hat: item.hat)
+  #         @order.order_items.find_or_initialize_by(hat: item.hat, quantity: item.quantity)
+
+  #       end
+  #       @order.update(status: 'complete')
+  #       clear_cart_items
+  #       OrderMailer.order_confirmation(current_user, @order).deliver_now
+  #       redirect_to home_path, notice: 'Your order has been placed successfully!'
+
+  #     else
+  #       render :new
+  #     end
+  #   end
+
   def create
     @order = current_user.orders.build(order_params.merge(status: 'pending'))
-  
-      if @order.save
-        current_user.cart.cart_items.all.each do |item|
-          #OrderItem.create(order: @order, hat: item.hat)
-          @order.order_items.find_or_initialize_by(hat: item.hat, quantity: item.quantity)
 
-        end
-        @order.update(status: 'complete')
-        clear_cart_items
-        OrderMailer.order_confirmation(current_user, @order).deliver_now
-        redirect_to home_path, notice: 'Your order has been placed successfully!'
-
-      else
-        render :new
-      end
+    current_user.cart.cart_items.all.each do |item|
+      @order.order_items.build(hat: item.hat, quantity: item.quantity)
     end
+
+    if @order.save
+      clear_cart_items
+      OrderMailer.order_confirmation(current_user, @order).deliver_now
+      redirect_to home_path, notice: 'Your order has been placed successfully!'
+    else
+      render :new
+    end
+  end
   
     private
   

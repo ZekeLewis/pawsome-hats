@@ -33,7 +33,8 @@ doberman_hat1 = Hat.create!(
   description: 'Elegant Doberman hat designed for every day use',
   category: 'Doberman',
   colour: 'Brown',
-  material: 'Leather'
+  material: 'Leather',
+  quantity: 3
 )
 
 doberman_hat2 = Hat.create!(
@@ -42,7 +43,8 @@ doberman_hat2 = Hat.create!(
   description: 'Lightweight and comfortable Doberman cap',
   category: 'Doberman',
   colour: 'Grey',
-  material: 'Synthetic'
+  material: 'Synthetic',
+  quantity: 11
 )
 
 poodle_hat1 = Hat.create!(

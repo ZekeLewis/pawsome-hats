@@ -10,6 +10,7 @@
 #  is_trade    :boolean
 #  material    :string
 #  price       :decimal(, )
+#  quantity    :integer
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

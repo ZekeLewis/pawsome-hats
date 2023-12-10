@@ -71,9 +71,19 @@
                 <h5 class="card-title"><%= hat.title %></h5>
                 <p class="card-text">Price: <%= number_to_currency(hat.price) %></p>
                 <% if current_user&.isvendors == 'y' %>
+                  <p class="card-text mr-2">Quantity: <%= hat.quantity %>
+                    <% if hat.quantity.present? && hat.quantity < 5 %>
+                      <span class="alert alert-warning p-1" role="alert"> Only <%= hat.quantity %> left!</span>
+                    <% end %>
+                  </p>
                   <%= link_to 'Edit', edit_poodlehat_path(hat), class: "btn btn-primary mr-2" %>
                   <%= button_to "Delete", poodlehat_path(hat), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                <% else %>
+                  <% if hat.quantity.present? && hat.quantity < 5 %>
+                    <span class="alert alert-warning p-1" role="alert"> Only <%= hat.quantity %> left!</span>
+                  <% end %>
                 <% end %>
+
               </div>
             </div>
           </div>
