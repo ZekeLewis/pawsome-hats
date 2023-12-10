@@ -14,26 +14,57 @@
     </div>
 
   <div class="mb-3">
-      <label class="form-label">Color</label>
-      <%= radio_button_tag 'color', 'Red', false, class: 'option-group color-option' %> Red
-      <%= radio_button_tag 'color', 'Green', false, class: 'option-group color-option' %> Green
-      <%= radio_button_tag 'color', 'Blue', false, class: 'option-group color-option' %> Blue
-    </div>
+  <label class="form-label">Color</label>
+  <div class="form-check">
+    <%= radio_button_tag 'color', 'Red', false, id: 'colorRed', class: 'form-check-input' %>
+    <label class="form-check-label" for="colorRed">Red</label>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'color', 'Green', false, id: 'colorGreen', class: 'form-check-input' %>
+    <label class="form-check-label" for="colorGreen">Green</label>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'color', 'Blue', false, id: 'colorBlue', class: 'form-check-input' %>
+    <label class="form-check-label" for="colorBlue">Blue</label>
+  </div>
+</div>
 
-  <div class="mb-3">
-      <label class="form-label">Size</label>
-      <%= radio_button_tag 'size', 'Small', false, class: 'option-group size-option' %> Small
-      <%= radio_button_tag 'size', 'Medium', false, class: 'option-group size-option' %> Medium
-      <%= radio_button_tag 'size', 'Large', false, class: 'option-group size-option' %> Large
-    </div>
+<div class="mb-3">
+  <label class="form-label">Size</label>
+  <div class="form-check">
+    <%= radio_button_tag 'size', 'Small', false, id: 'sizeSmall', class: 'form-check-input' %>
+    <label class="form-check-label" for="sizeSmall">Small</label>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'size', 'Medium', false, id: 'sizeMedium', class: 'form-check-input' %>
+    <label class="form-check-label" for="sizeMedium">Medium</label>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'size', 'Large', false, id: 'sizeLarge', class: 'form-check-input' %>
+    <label class="form-check-label" for="sizeLarge">Large</label>
+  </div>
+</div>
 
-    <div class="mb-3">
-      <label class="form-label">Material</label>
-      <%= radio_button_tag 'material', 'Cotton', false, class: 'option-group material-option' %> Cotton
-      <%= radio_button_tag 'material', 'Wool', false, class: 'option-group material-option' %> Wool
-      <%= radio_button_tag 'material', 'Suede', false, class: 'option-group material-option' %> Suede
-      <%= radio_button_tag 'material', 'Synthetic', false, class: 'option-group material-option' %> Synthetic
-    </div>
+<div class="mb-3">
+  <label class="form-label">Material</label>
+  <div class="form-check">
+    <%= radio_button_tag 'material', 'Cotton', false, id: 'materialCotton', class: 'form-check-input' %>
+    <label class="form-check-label" for="materialCotton">Cotton</label>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'material', 'Wool', false, id: 'materialWool', class: 'form-check-input' %>
+    <label class="form-check-label" for="materialWool">Wool</label>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'material', 'Suede', false, id: 'materialSuede', class: 'form-check-input' %>
+    <label class="form-check-label" for="materialSuede">Suede</label>
+  </div>
+  <div class="form-check">
+    <%= radio_button_tag 'material', 'Synthetic', false, id: 'materialSynthetic', class: 'form-check-input' %>
+    <label class="form-check-label" for="materialSynthetic">Synthetic</label>
+  </div>
+</div>
+
 
     
 

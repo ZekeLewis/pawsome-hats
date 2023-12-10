@@ -2,11 +2,17 @@
 #
 # Table name: orders
 #
-#  id         :bigint           not null, primary key
-#  status     :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id               :bigint           not null, primary key
+#  shipping_address :string
+#  shipping_city    :string
+#  shipping_country :string
+#  shipping_name    :string
+#  shipping_state   :string
+#  shipping_zip     :string
+#  status           :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  user_id          :bigint           not null
 #
 # Indexes
 #

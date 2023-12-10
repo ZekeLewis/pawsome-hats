@@ -71,4 +71,15 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.active_storage.service = :local
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'localhost',
+    user_name:            'zekelewis1115@gmail.com',
+    password:             'jtuy tmzp ffvp kimo',
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 end

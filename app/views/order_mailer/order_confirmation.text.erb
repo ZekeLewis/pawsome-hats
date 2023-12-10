@@ -1,0 +1,31 @@
+Order#order_confirmation
+
+Hello <%= @user.email %>,
+
+Thank you for placing your order with us!
+
+Order Summary:
+<% @order.order_items.each do |item| %>
+- <%= item.hat.title %> 
+  Price: <%= number_to_currency(item.hat.price) %>
+  Quantity: <%= item.quantity %>
+<% end %>
+
+Total: <%= number_to_currency(@order.order_items.sum { |item| item.quantity * item.hat.price }) %>
+
+Shipping Information:
+Name: <%= @order.shipping_name %>
+Address: <%= @order.shipping_address %>
+City: <%= @order.shipping_city %>
+State/Province: <%= @order.shipping_state %>
+Postal Code: <%= @order.shipping_zip %>
+Country: <%= @order.shipping_country %>
+
+Your order is now being processed, and we will notify you once it has been shipped.
+
+If you have any questions or need to make changes to your order, please contact us at support@example.com.
+
+Thank you for shopping with us!
+
+Best regards,
+Pawsome Team
