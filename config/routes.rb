@@ -51,6 +51,10 @@ Rails.application.routes.draw do
   post 'home/dobermanhat/:id/cart/add_item/:id', to: 'carts#add_item', as: 'add_item_to_cart'
   post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'apply_promo_code'
 
+  #update cart
+  patch 'cart/review/:id/update_quantity', to: 'cart_items#update_quantity', as: :update_cart_item_quantity
+
+
 
   get 'trade', to: 'trade#trade', as: 'trade'
   get 'trade/new', to: 'trade#new', as: 'new_trade'
@@ -63,9 +67,12 @@ Rails.application.routes.draw do
   get 'home/feedback/show', to: 'feedbacks#show', as: 'show_feedback'
   get 'home/feedback', to: 'feedbacks#new', as: 'new_home_feedback'
   post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
-  resources :carts do
-    post 'apply_promo_code', on: :member
-  end
+  # resources :carts do
+  #   post 'apply_promo_code', on: :member
+  # end
+
+  post 'cart/review/:id/apply_promo_code', to: 'carts#apply_promo_code'
+
 
   post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'cart_apply_promo_code'
   
