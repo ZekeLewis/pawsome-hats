@@ -112,3 +112,38 @@ main {
   width: auto;
   vertical-align: middle;
 }
+.navbar-feedback-icon {
+  height: 30px; /* Adjust the height as needed to match other navbar items */
+  width: auto;
+  vertical-align: middle;
+}
+
+.rating {
+  margin-bottom: 20px;
+}
+
+.rating span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url('path/to/star.png') no-repeat;
+  cursor: pointer;
+  color: white; /* Start as white color */
+}
+
+.rating span.active {
+  background: url('path/to/star_active.png') no-repeat;
+  color: gold; /* Change to gold color when active */
+}
+
+
+.rating .fa-star {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.rating .fa-star.active {
+  color: #fdd835;
+}

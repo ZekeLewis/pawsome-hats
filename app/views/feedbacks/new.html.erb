@@ -1,4 +1,13 @@
-<!-- app/views/feedbacks/new.html.erb -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
 <div class="container mt-4">
   <h2 class="mb-4">Customer Feedback</h2>
 
@@ -10,18 +19,25 @@
 
   <%= form_for @feedback, url: new_home_feedback_path do |f| %>
     <div class="mb-3">
-      <%= f.label :rating, class: "form-label" %>
-      <%= f.select :rating, (1..5).to_a, { prompt: 'Select a rating', required: true }, class: "form-select" %>
+      <label class="form-label">Rating</label>
+      <div class="rating">
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+      </div>
+      <input type="hidden" name="feedback[rating]" id="rating">
     </div>
     <div class="mb-3">
       <%= f.label :category, class: "form-label" %>
-      <%= f.select :category, ['Bug Report', 'Suggestion','Comment'], { prompt: 'Select a category', required: true }, class: "form-select" %>
+      <%= f.select :category, ['Bug Report', 'Suggestion', 'Comment'], { prompt: 'Select a category', required: true }, class: "form-select" %>
     </div>
     <div class="mb-3">
       <%= f.label :details, class: "form-label" %>
       <%= f.text_area :details, class: "form-control" %>
     </div>
-     <!-- Display the error message -->
+    <!-- Display the error message -->
     <% if @feedback.errors.any? %>
       <div class="alert alert-danger">
         <p><strong>Error:</strong> <%= @feedback.errors.full_messages.join(', ') %></p>
@@ -29,11 +45,31 @@
     <% end %>
 
     <div>
-      <%= f.submit 'Send Feedback', class: "btn btn-primary" %>
+      <%= f.submit 'Send Feedback!', class: "btn btn-primary" %>
     </div>
-    
-    
-    <%= link_to "View Feedbacks", show_feedback_path, class: "btn btn-secondary" %>
 
+    <%= link_to "View Feedbacks", show_feedback_path, class: "btn btn-secondary" %>
   <% end %>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.rating span').click(function() {
+      var rating = $(this).index() + 1;
+      $('#rating').val(rating);
+
+      // Reset all stars to default color
+      $('.rating span').css('background', 'url("path/to/star.png") no-repeat');
+      $('.rating span').css('color', 'white');
+
+      // Fill the selected stars with gold color
+      for (var i = 0; i < rating; i++) {
+        $('.rating span:eq(' + i + ')').css('background', 'url("path/to/star_active.png") no-repeat');
+        $('.rating span:eq(' + i + ')').css('color', 'gold');
+      }
+    });
+  });
+</script>
+</body>
+</html>
