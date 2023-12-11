@@ -24,8 +24,6 @@
               <div class="card-body">
                 <h5 class="card-title"><%= hat.title %></h5>
                 <p class="card-text">Price: <%= number_to_currency(hat.price) %></p>
-                <p class="card-text">Color: <%= hat.colour %></p>
-                <p class="card-text">Material: <%= hat.material %></p>
                 <% if current_user&.isvendors == 'y' %>
                   <%= link_to 'Edit', edit_chihuahuahat_path(hat), class: "btn btn-primary mr-2" %>
                   <%= button_to "Delete", chihuahuahat_path(hat), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>

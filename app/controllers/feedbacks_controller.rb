@@ -1,4 +1,6 @@
 class FeedbacksController < ApplicationController
+    include FeedbacksHelper
+
   before_action :authenticate_user!, only: [:new, :create, :index]
 
   def new
