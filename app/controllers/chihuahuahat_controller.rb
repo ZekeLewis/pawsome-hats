@@ -24,10 +24,35 @@ class ChihuahuahatController < ApplicationController
   
   def index
     @chihuahuahats = Hat.where('title ILIKE ?', '%chihuahua%')
-    if params[:query].present?
-        # Add the user's query to the search. Use ILIKE for case-insensitive search if using PostgreSQL.
-        @chihuahuahats = @chihuahuahats.where('title ILIKE ?', "%#{params[:query]}%")
-      end
+      if params[:sort_order].present?
+        @chihuahuahats = @chihuahuahats.order(price: params[:sort_order])
+     end  
+   # Filter by color if the color parameter is present
+   if params[:colour].present?
+     @chihuahuahats = @chihuahuahats.where(colour: params[:colour])
+   end
+ 
+   # Filter by material if the material parameter is present
+   if params[:material].present?
+     @chihuahuahats = @chihuahuahats.where(material: params[:material])
+   end
+ 
+   # Filter by minimum price if the min_price parameter is present
+   if params[:min_price].present?
+     @chihuahuahats = @chihuahuahats.where('price >= ?', params[:min_price])
+   end
+ 
+   # Filter by maximum price if the max_price parameter is present
+   if params[:max_price].present?
+     @chihuahuahats = @chihuahuahats.where('price <= ?', params[:max_price])
+   end
+ 
+   # If you want to include a search term filter
+   if params[:query].present?
+     @chihuahuahats = @chihuahuahats.where('category ILIKE :search OR colour ILIKE :search OR material ILIKE :search OR description ILIKE :search', search: "%#{params[:query]}%")
+ 
+   end
+    
     end
 
     def show

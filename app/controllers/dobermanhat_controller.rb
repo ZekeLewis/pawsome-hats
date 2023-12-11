@@ -21,13 +21,40 @@ class DobermanhatController < ApplicationController
     end
   
   
-  def index
-    @dobermanhats = Hat.where('category ILIKE ?', '%Doberman%')
-    if params[:query].present?
-        # Add the user's query to the search. Use ILIKE for case-insensitive search if using PostgreSQL.
-        @dobermanhats = @dobermanhats.where('category ILIKE ?', "%#{params[:query]}%")
+    def index
+      @dobermanhats = Hat.where('category ILIKE ?', '%Doberman%')
+       
+        
+      if params[:sort_order].present?
+         @dobermanhats = @dobermanhats.order(price: params[:sort_order])
+      end  
+    # Filter by color if the color parameter is present
+      if params[:colour].present?
+        @dobermanhats = @dobermanhats.where(colour: params[:colour])
       end
-    end
+  
+    # Filter by material if the material parameter is present
+      if params[:material].present?
+        @dobermanhats = @dobermanhats.where(material: params[:material])
+      end
+  
+    # Filter by minimum price if the min_price parameter is present
+      if params[:min_price].present?
+        @dobermanhats = @dobermanhats.where('price >= ?', params[:min_price])
+      end
+  
+    # Filter by maximum price if the max_price parameter is present
+      if params[:max_price].present?
+        @dobermanhats = @dobermanhats.where('price <= ?', params[:max_price])
+      end
+  
+    # If you want to include a search term filter
+      if params[:query].present?
+        @dobermanhats = @dobermanhats.where('category ILIKE :search OR colour ILIKE :search OR material ILIKE :search OR description ILIKE :search', search: "%#{params[:query]}%")
+    
+      end
+  
+  end
 
     def show
       @hat = Hat.find(params[:id])
