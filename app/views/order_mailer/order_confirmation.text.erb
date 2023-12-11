@@ -14,7 +14,7 @@ Order Summary:
 Subtotal: <%= number_to_currency(@order.order_items.sum { |item| item.quantity * item.hat.price }) %>
 Taxes: <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })) * 0.1 ) %>
 Shipping: <%= number_to_currency(5.00) %></p>
-Total: <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })+5) * 1.1 ) %>
+Total: <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })) * 1.1 + 5) %>
 
 Shipping Information:
 Name: <%= @order.shipping_name %>

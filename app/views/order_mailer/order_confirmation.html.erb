@@ -30,7 +30,7 @@
       <p><strong>Subtotal:</strong> <%= number_to_currency(@order.order_items.sum { |item| item.quantity * item.hat.price }) %></p>
       <p><strong>Taxes:</strong> <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })) * 0.1 ) %></p>
       <p><strong>Shipping:</strong> <%= number_to_currency(5.00) %></p>
-      <p><strong>Total:</strong> <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })+5) * 1.1 ) %></p>
+      <p><strong>Total:</strong> <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })) * 1.1 + 5) %></p>
 
       <h3>Shipping Information:</h3>
       <p>
