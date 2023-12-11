@@ -23,10 +23,15 @@
               <td><%= order.id %></td>
               <td><%= order.created_at.strftime("%d %b %Y %H:%M") %></td>
               <td><%= link_to 'Details', order_show_path(order), class: 'btn btn-primary'%></td>
+              
+          
             </tr>
-          <% end %>
+            <% end %>
+          
+        </li>
         </tbody>
       </table>
     </div>
+    <td><%= link_to 'Would you like to provide us feedback?', new_home_feedback_path, class: 'btn btn-primary' %></td>
   <% end %>
 </div>
