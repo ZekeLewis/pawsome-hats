@@ -18,9 +18,20 @@
       <p><strong>Color:</strong> <%= @hat.colour %></p>
       <p><strong>Material:</strong> <%= @hat.material %></p>
       <p><strong>Category:</strong> <%= @hat.category %></p>
+      <% if current_user&.isvendors == 'y' %>
+        <p><strong>Quantity:</strong> <%= @hat.quantity %></p>
+        <% if @hat.quantity.present? && @hat.quantity < 5 %>
+            <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
+              <% end %>
+          </p>
+      <% else %>
+          <% if @hat.quantity.present? && @hat.quantity < 5 %>
+           <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
+            <% end %>
+       <% end %>
     </div>
   </div>
-  <div class="text-center mt-4">
+  <div class="my-3"">
   <%= link_to "AddtoCart", poodle_add_to_cart_path, class: "btn btn-secondary" %>
     <%= link_to "Back", poodleindex_path, class: "btn btn-secondary" %>
   </div>

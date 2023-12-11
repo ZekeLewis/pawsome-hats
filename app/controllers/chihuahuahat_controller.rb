@@ -124,7 +124,7 @@ class ChihuahuahatController < ApplicationController
   private
   
   def hat_params
-    params.require(:hat).permit(:title, :price, :description, :colour, :material, :category)
+    params.require(:hat).permit(:title, :price, :description, :colour, :material, :category, :quantity)
   end
   
 
