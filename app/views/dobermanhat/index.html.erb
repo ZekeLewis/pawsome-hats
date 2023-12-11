@@ -2,12 +2,56 @@
 
 <h1 class="my-4 text-center">Doberman Hats</h1>
 
+<head>
+<div class="search-sort-filter-container">
 <%= form_with url: dobermanindex_path, method: :get, local: true, class: 'mb-4' do |form| %>
   <div class="form-group">
     <%= text_field_tag :query, params[:query], placeholder: "Search for a Doberman hat", class: 'form-control' %>
   </div>
   <%= submit_tag "Search", class: 'btn btn-primary' %>
 <% end %>
+
+
+  <div class="sort-container">
+<%= form_with url: dobermanindex_path, method: :get, id: 'sort-form', class: 'sort-form', remote: true do %>
+  <div class="dropdown">
+    <button type="button" class="dropbtn">Sort</button>
+    <div class="dropdown-content">
+      <%= select_tag :sort_order, options_for_select([['Price: High to Low', 'desc'], ['Price: Low to High', 'asc']]), include_blank: true %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<div class="filter-container">
+<%= form_with url: dobermanindex_path, method: :get, id: 'filter-form', class: 'filter-form', remote: true do |f| %>
+  <div class="dropdown">
+    <button type="button" class="dropbtn">Filter</button>
+    <div class="dropdown-content">
+        <%= f.label :colour %>
+        <%= f.select :colour, ['Brown', 'Grey', 'Maroon', 'Black', 'White'], selected: params[:colour], include_blank: true, class: 'form-select' %>
+
+        <%= f.label :material %>
+        <%= f.select :material, ['Cotton', 'Synthetic'], selected: params[:material], include_blank: true, class: 'form-select' %>
+
+        <div class="mb-3">
+          <%= f.label :min_price, 'Min Price' %>
+          <%= f.number_field :min_price, value: params[:min_price], min: 0, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :max_price, 'Max Price' %>
+          <%= f.number_field :max_price, value: params[:max_price], min: 0, class: 'form-control' %>
+        </div>
+
+        <%= f.submit 'Apply', class: 'btn btn-primary' %>
+        <%= link_to 'Reset', dobermanindex_path, remote: true, id: 'reset-filters', class: 'btn btn-secondary' %>
+      </div>
+    </div>
+<% end %>
+</div>
+</div>
+</head>
 
 <div class="container">
   <div class="row">
@@ -42,3 +86,66 @@
     <%= link_to 'New Hat', new_dobermanhat_path, class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  function toggleDropdown(event) {
+    
+    var dropdowns = document.querySelectorAll('.dropdown-content');
+    dropdowns.forEach(function(dropdown) {
+      if (dropdown !== event.target.nextElementSibling) {
+        dropdown.classList.remove('show-dropdown');
+      }
+    });
+
+    
+    var dropdownContent = event.target.nextElementSibling;
+    dropdownContent.classList.toggle('show-dropdown');
+    
+  
+    event.stopPropagation();
+  }
+  
+
+  
+  function closeDropdown(event) {
+    var dropdowns = document.querySelectorAll('.dropdown-content');
+    dropdowns.forEach(function(dropdown) {
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('show-dropdown');
+      }
+    });
+  }
+  document.getElementById('sort-form').addEventListener('change', function() {
+    this.submit();
+  });
+
+
+  function submitSortForm(event) {
+    if (event.target.tagName === 'SELECT') {
+      this.form.submit();
+    }
+  }
+
+ 
+  var dropdownButtons = document.querySelectorAll('.dropbtn');
+  dropdownButtons.forEach(function(button) {
+    button.addEventListener('click', toggleDropdown);
+  });
+
+
+  document.addEventListener('click', closeDropdown);
+
+ 
+  var sortForm = document.querySelector('.sort-form');
+  if (sortForm) {
+    sortForm.addEventListener('change', submitSortForm);
+  }
+});
+
+</script>
+
+
+
+
