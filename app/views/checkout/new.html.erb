@@ -20,9 +20,10 @@
       </tr>
     <% end %>
   </table>
-
+  <p>Shipping: <%= number_to_currency(@shipping) %></p>
   <p>Subtotal: <%= number_to_currency(@subtotal) %></p>
   <p>Taxes: <%= number_to_currency(@taxes) %></p>
+
   <p>Total: <%= number_to_currency(@total) %></p>
 
     <%= form_with(model: Order.new, url: checkout_create_path, method: :post, local: true, class: "needs-validation", novalidate: true) do |form| %>

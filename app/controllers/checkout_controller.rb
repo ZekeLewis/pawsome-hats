@@ -5,7 +5,8 @@ class CheckoutController < ApplicationController
   def new
     @user = current_user
     @cart_items = @user.cart.cart_items
-    @subtotal = @cart_items.sum { |item| item.quantity * item.hat.price }
+    @shipping = 5.00
+    @subtotal = @cart_items.sum { |item| item.quantity * item.hat.price }  + @shipping
     @taxes = @subtotal * 0.1 # Assuming a 10% tax rate
     @total = @subtotal + @taxes
   end
