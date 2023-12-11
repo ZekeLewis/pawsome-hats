@@ -3,10 +3,25 @@
 <head>
   <title>Checkout and Payment</title>
   <!-- Include Bootstrap CSS -->
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </head>
 <body>
   <div class="container mt-5">
     <h1 class="text-center mb-4">Checkout and Payment</h1>
+
+  <h3>Order Summary</h3>
+  <table class="table">
+    <% @cart_items.each do |item| %>
+      <tr>
+        <td><%= item.hat.title %></td>
+        <td><%= number_to_currency(item.hat.price) %></td>
+        <td><%= item.quantity %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <p>Total: <%= number_to_currency(@total) %></p>
 
     <%= form_with(model: Order.new, url: checkout_create_path, method: :post, local: true, class: "needs-validation", novalidate: true) do |form| %>
       <div class="payment-information">
@@ -29,7 +44,7 @@
         <div class="form-row">
           <div class="col-md-4 mb-3">
             <%= form.label :card_expiry, "Expiration Date (MM/YY)" %>
-            <%= form.text_field :card_expiry, required: true, pattern: "\\d{2}/\\d{2}", class: "form-control" %>
+            <%= form.text_field :card_expiry, required: true, class: "form-control" %>
           </div>
           <div class="col-md-4 mb-3">
             <%= form.label :card_cvc, "CVC" %>
@@ -37,13 +52,50 @@
           </div>
         </div>
 
+        <div class="shipping-information">
+      <h2 class="mb-4">Shipping Information</h2>
+
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :shipping_name, "Full Name" %>
+          <%= form.text_field :shipping_name, required: true, class: "form-control" %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :shipping_address, "Address" %>
+          <%= form.text_field :shipping_address, required: true, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <%= form.label :shipping_city, "City" %>
+          <%= form.text_field :shipping_city, required: true, class: "form-control" %>
+        </div>
+        <div class="col-md-4 mb-3">
+          <%= form.label :shipping_state, "State/Province" %>
+          <%= form.text_field :shipping_state, required: true, class: "form-control" %>
+        </div>
+        <div class="col-md-4 mb-3">
+          <%= form.label :shipping_zip, "Postal Code" %>
+          <%= form.text_field :shipping_zip, required: true, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :shipping_country, "Country" %>
+          <%= form.text_field :shipping_country, required: true, class: "form-control" %>
+        </div>
+      </div>
+
+    </div>
+
         <%= form.submit "Complete Order", class: "btn btn-primary btn-lg btn-block" %>
       </div>
     <% end %>
   </div>
 
-  <!-- Bootstrap JavaScript Bundle with Popper -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>

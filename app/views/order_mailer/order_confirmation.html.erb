@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Confirmation</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { width: 600px; margin: 0 auto; }
+    .header { background-color: #f8f8f8; padding: 10px; text-align: center; }
+    .order-summary { background-color: #e9e9e9; padding: 20px; }
+    .order-item { margin-bottom: 10px; }
+    .footer { background-color: #f8f8f8; padding: 10px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Order Confirmation</h1>
+    </div>
+    <div class="order-summary">
+      <h2>Hello <%= @user.email %>,</h2>
+      <p>Thank you for your order. Here is a summary of your purchase:</p>
+      
+      <% @order.order_items.each do |item| %>
+        <div class="order-item">
+          <strong><%= item.hat.title %></strong><br>
+          Price: <%= number_to_currency(item.hat.price) %><br>
+          Quantity: <%= item.quantity %>
+        </div>
+      <% end %>
+      <p><strong>Subtotal:</strong> <%= number_to_currency(@order.order_items.sum { |item| item.quantity * item.hat.price }) %></p>
+      <p><strong>Taxes:</strong> <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })) * 0.1 ) %></p>
+      <p><strong>Shipping:</strong> <%= number_to_currency(5.00) %></p>
+      <p><strong>Total:</strong> <%= number_to_currency(((@order.order_items.sum { |item| item.quantity * item.hat.price })) * 1.1 + 5) %></p>
+
+      <h3>Shipping Information:</h3>
+      <p>
+        Name: <%= @order.shipping_name %><br>
+        Address: <%= @order.shipping_address %><br>
+        City: <%= @order.shipping_city %><br>
+        State/Province: <%= @order.shipping_state %><br>
+        Postal Code: <%= @order.shipping_zip %><br>
+        Country: <%= @order.shipping_country %>
+      </p>
+    </div>
+    <div class="footer">
+      <p>If you have any questions, please contact us at support@example.com.</p>
+    </div>
+  </div>
+</body>
+</html>

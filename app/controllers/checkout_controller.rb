@@ -5,20 +5,24 @@ class CheckoutController < ApplicationController
   def new
     @user = current_user
     @cart_items = @user.cart.cart_items
-    @subtotal = @cart_items.sum { |item| item.hat.price }
+    @shipping = 5.00
+    @subtotal = @cart_items.sum { |item| item.quantity * item.hat.price }
     @taxes = @subtotal * 0.1 # Assuming a 10% tax rate
-    @total = @subtotal + @taxes
+    @total = @subtotal + @taxes + @shipping
   end
 
   def create
-      @order = current_user.orders.build(:status => 'pending')
+    @order = current_user.orders.build(order_params.merge(status: 'pending'))
   
       if @order.save
         current_user.cart.cart_items.all.each do |item|
-          OrderItem.create(order: @order, hat: item.hat)
+          #OrderItem.create(order: @order, hat: item.hat)
+          @order.order_items.find_or_initialize_by(hat: item.hat, quantity: item.quantity)
+
         end
         @order.update(status: 'complete')
         clear_cart_items
+        OrderMailer.order_confirmation(current_user, @order).deliver_now
         redirect_to home_path, notice: 'Your order has been placed successfully!'
 
       else
@@ -29,7 +33,7 @@ class CheckoutController < ApplicationController
     private
   
     def order_params
-      params.require(:order).permit(:status) # Add other fields as needed
+      params.require(:order).permit(:status, :shipping_name, :shipping_address, :shipping_city, :shipping_state, :shipping_zip, :shipping_country)
     end
 
     def clear_cart_items
