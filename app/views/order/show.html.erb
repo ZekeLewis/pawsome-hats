@@ -1,34 +1,74 @@
-<%# app/views/orders/show.html.erb %>
+<div class="container mt-5">
+  <h2 class="mb-5 text-center display-4">Order Details</h2>
 
-<div class="container mt-4">
-  <h2 class="mb-4 text-center text-uppercase font-weight-bold">Order Details</h2>
+  <div class="row">
+    <!-- Summary Card -->
+    <div class="col-md-6">
+      <div class="card mb-4 border-primary shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="m-0">Summary</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Receipt Number: <%= @order.id %></p>
+          <p class="card-text">Order Date: <%= @order.created_at.strftime("%d %b %Y %H:%M") %></p>
+          <p class="card-text">Subtotal: $<%= @order_items.sum { |item| item.quantity * item.hat.price } %></p>
+          <p class="card-text">Taxes: $<%= (@order_items.sum { |item| item.quantity * item.hat.price } * 0.1).round(2) %></p>
+          <p class="card-text">Shipping Fee: $5.00</p>
+          <p class="card-text text-success font-weight-bold">Total: $<%= @order_items.sum { |item| item.quantity * item.hat.price } + (@order_items.sum { |item| item.quantity * item.hat.price } * 0.1).round(2) + 5 %></p>
+        </div>
+      </div>
+    </div>
 
-  <div class="card mb-3 shadow-lg">
-    <div class="card-body">
-      <h5 class="card-title">Order ID: <%= @order.id %></h5>
-      <p class="card-text">Order Date: <%= @order.created_at.strftime("%d %b %Y %H:%M") %></p>
-      <!-- Add more order details if needed -->
+    <!-- Shipping Information Card -->
+    <div class="col-md-6">
+      <div class="card mb-4 border-primary shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="m-0">Shipping Information</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Name: <%= @order.shipping_name %></p>
+          <p class="card-text">Street: <%= @order.shipping_address %></p>
+          <p class="card-text">City: <%= @order.shipping_city %></p>
+          <p class="card-text">State: <%= @order.shipping_state %></p>
+          <p class="card-text">Zip: <%= @order.shipping_zip %></p>
+          <p class="card-text">Country: <%= @order.shipping_country %></p>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <h3 class="text-center mb-3 text-uppercase font-weight-bold">Items in this Order</h3>
-  <div class="row">
-    <% @order_items.each do |item|%>
-      <div class="col-md-4 mb-3">
-        <div class="card h-100">
-          <%= image_tag item.hat.image, class: "card-img-top" if item.hat.image.attached? %>
-          <div class="card-body">
+<h3 class="text-center mb-4 display-5">Items in this Order</h3>
+<div class="row">
+  <% @order_items.each do |item|%>
+    <% if item.hat && item.quantity %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 border-secondary shadow-sm">
+          <%= image_tag item.hat.image, class: "card-img-top img-fluid" if item.hat.image.attached? %>
+          <div class="card-body bg-dark">
             <h5 class="card-title"><%= item.hat.title %></h5>
-            <p class="card-text"><%= item.hat.description %></p>
-            <p class="card-text">Price: $ <%= item.hat.price %></p>
+            <p class="card-text small text-muted mb-2"><%= truncate(item.hat.description, length: 100) %></p>
+            <ul class="list-unstyled mb-0">
+              <li><strong>Price:</strong> $ <%= item.hat.price %></li>
+              <li><strong>Quantity:</strong> <%= item.quantity %></li>
+            </ul>
+          </div>
+          <div class="card-footer bg-white">
+            <p class="card-text text-primary font-weight-bold">Total Price: $<%= item.hat.price * item.quantity %></p>
           </div>
         </div>
       </div>
+    <% else %>
+      <div class="col-12">
+        <p class="text-muted">Item details not available</p>
+      </div>
     <% end %>
-  </div>
+  <% end %>
+</div>
 
-  <!-- 'Back to Order History' button outside of the loop -->
-  <div class="text-center mt-4">
-    <%= link_to 'Back to Order History', order_history_path, class: 'btn btn-primary' %>
+
+
+  <div class="text-center mt-5">
+    <%= link_to 'Back to Order History', order_history_path, class: 'btn btn-outline-secondary btn-lg' %>
   </div>
 </div>

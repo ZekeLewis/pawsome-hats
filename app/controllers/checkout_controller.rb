@@ -11,33 +11,15 @@ class CheckoutController < ApplicationController
     @total = @subtotal + @taxes + @shipping
   end
 
-  # def create
-  #   @order = current_user.orders.build(order_params.merge(status: 'pending'))
-  
-  #     if @order.save
-  #       current_user.cart.cart_items.all.each do |item|
-  #         #OrderItem.create(order: @order, hat: item.hat)
-  #         @order.order_items.find_or_initialize_by(hat: item.hat, quantity: item.quantity)
-
-  #       end
-  #       @order.update(status: 'complete')
-  #       clear_cart_items
-  #       OrderMailer.order_confirmation(current_user, @order).deliver_now
-  #       redirect_to home_path, notice: 'Your order has been placed successfully!'
-
-  #     else
-  #       render :new
-  #     end
-  #   end
-
   def create
     @order = current_user.orders.build(order_params.merge(status: 'pending'))
 
-    current_user.cart.cart_items.all.each do |item|
+    current_user.cart.cart_items.each do |item|
       @order.order_items.build(hat: item.hat, quantity: item.quantity)
     end
 
     if @order.save
+      mark_hats_as_sold(@order)
       clear_cart_items
       OrderMailer.order_confirmation(current_user, @order).deliver_now
       redirect_to home_path, notice: 'Your order has been placed successfully!'
@@ -49,10 +31,16 @@ class CheckoutController < ApplicationController
     private
   
     def order_params
-      params.require(:order).permit(:status, :shipping_name, :shipping_address, :shipping_city, :shipping_state, :shipping_zip, :shipping_country)
+      params.require(:order).permit(:shipping_name, :shipping_address, :shipping_city, :shipping_state, :shipping_zip, :shipping_country)
     end
 
     def clear_cart_items
       current_user.cart.cart_items.destroy_all
+    end
+
+    def mark_hats_as_sold(order)
+      order.order_items.each do |item|
+        item.hat.update(is_trade: false) if item.hat.is_trade
+      end
     end
 end
