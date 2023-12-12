@@ -6,11 +6,13 @@
 #  category    :string
 #  colour      :string
 #  description :text
+#  fit         :string
 #  image       :binary
 #  is_trade    :boolean
 #  material    :string
 #  price       :decimal(, )
 #  quantity    :integer
+#  string      :string
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

@@ -20,9 +20,12 @@
       <p><strong>Category:</strong> <%= @hat.category %></p>
       <% if current_user&.isvendors == 'y' %>
         <p><strong>Quantity:</strong> <%= @hat.quantity %></p>
-        <% if @hat.quantity.present? && @hat.quantity < 5 %>
-            <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
-              <% end %>
+        <% if @hat.quantity.present? && @hat.quantity < 5 && @hat.quantity >= 1 %>
+                      <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
+                    <%end%>
+                    <%if @hat.quantity.present? && @hat.quantity < 1 %>
+                    <span class="alert alert-warning p-1" role="alert"> Out of Stock</span>
+                    <%end%>
           </p>
       <% else %>
           <% if @hat.quantity.present? && @hat.quantity < 5 %>
@@ -33,7 +36,9 @@
   </div>
 
   <div class="my-3">
-    <%= link_to "Add to cart" , chihuahuahat_add_to_cart_path, class: "btn btn-secondary ml-2" %>
+    <%if @hat.quantity.present? && @hat.quantity >= 1 %>
+    <%= link_to "AddtoCart", poodle_add_to_cart_path, class: "btn btn-secondary" %>
+  <%end%>
     <%= link_to "Back", chihuahuaindex_path, class: "btn btn-secondary ml-2" %>
   </div>
 </div>

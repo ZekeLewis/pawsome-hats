@@ -34,7 +34,13 @@
                   <td>
                     <%= form_with url: update_cart_item_quantity_path(cart_item), method: :patch, remote: true do |form| %>
                     <%= form.number_field :quantity, value: cart_item.quantity, min: 1, name: 'cart_item[quantity]' %>
+        
                     <%= form.submit "Update" %>
+                    
+                    <%if cart_item.hat.quantity - cart_item.quantity <0%>
+                    <span class="alert alert-warning p-1" role="alert">Only <%=cart_item.hat.quantity%> left in stock</span>
+                    <%end%>
+            
                     <% end %>
                   </td>
                   <td>
