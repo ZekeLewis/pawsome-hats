@@ -11,6 +11,18 @@ class CheckoutController < ApplicationController
     @total = @subtotal + @taxes + @shipping
   end
 
+  def checkout
+    @total_value = params[:total_value]
+    #render :json => @total_value
+    @user = current_user
+    @cart_items = @user.cart.cart_items
+    @shipping = 5.00
+    @subtotal = @cart_items.sum { |item| item.quantity * item.hat.price }
+    @taxes = @subtotal * 0.1 # Assuming a 10% tax rate
+    @total = @total_value #@subtotal + @taxes + @shipping
+    render :new
+  end
+
   def create
     @order = current_user.orders.build(order_params.merge(status: 'pending'))
 
