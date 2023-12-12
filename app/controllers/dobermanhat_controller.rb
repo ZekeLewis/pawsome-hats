@@ -50,7 +50,7 @@ class DobermanhatController < ApplicationController
   
     # If you want to include a search term filter
       if params[:query].present?
-        @dobermanhats = @dobermanhats.where('category ILIKE :search OR colour ILIKE :search OR material ILIKE :search OR description ILIKE :search', search: "%#{params[:query]}%")
+        @dobermanhats = @dobermanhats.where('category ILIKE :search OR colour ILIKE :search OR material ILIKE :search OR description ILIKE :search OR fit ILIKE :search', search: "%#{params[:query]}%")
     
       end
   

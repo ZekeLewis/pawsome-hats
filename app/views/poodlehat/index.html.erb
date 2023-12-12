@@ -29,10 +29,10 @@
     <button type="button" class="dropbtn">Filter</button>
     <div class="dropdown-content">
         <%= f.label :colour %>
-        <%= f.select :colour, ['Brown', 'Grey', 'Maroon', 'Black', 'White'], selected: params[:colour], include_blank: true, class: 'form-select' %>
+        <%= f.select :colour, ['Brown', 'Grey', 'Pink', 'Black', 'Blue'], selected: params[:colour], include_blank: true, class: 'form-select' %>
 
         <%= f.label :material %>
-        <%= f.select :material, ['Cotton', 'Synthetic'], selected: params[:material], include_blank: true, class: 'form-select' %>
+        <%= f.select :material, ['Cotton', 'Polyester', 'Leather', 'Wool'], selected: params[:material], include_blank: true, class: 'form-select' %>
 
         <div class="mb-3">
           <%= f.label :min_price, 'Min Price' %>
@@ -72,16 +72,22 @@
                 <p class="card-text">Price: <%= number_to_currency(hat.price) %></p>
                 <% if current_user&.isvendors == 'y' %>
                   <p class="card-text mr-2">Quantity: <%= hat.quantity %>
-                    <% if hat.quantity.present? && hat.quantity < 5 %>
+                    <% if hat.quantity.present? && hat.quantity < 5 && hat.quantity >= 1 %>
                       <span class="alert alert-warning p-1" role="alert"> Only <%= hat.quantity %> left!</span>
-                    <% end %>
+                    <%end%>
+                    <%if hat.quantity.present? && hat.quantity < 1 %>
+                    <span class="alert alert-warning p-1" role="alert"> Out of Stock</span>
+                    <%end%>
                   </p>
                   <%= link_to 'Edit', edit_poodlehat_path(hat), class: "btn btn-primary mr-2" %>
                   <%= button_to "Delete", poodlehat_path(hat), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
                 <% else %>
-                  <% if hat.quantity.present? && hat.quantity < 5 %>
-                    <span class="alert alert-warning p-1" role="alert"> Only <%= hat.quantity %> left!</span>
-                  <% end %>
+                  <% if hat.quantity.present? && hat.quantity < 5 && hat.quantity >= 1 %>
+                      <span class="alert alert-warning p-1" role="alert"> Only <%= hat.quantity %> left!</span>
+                    <%end%>
+                    <%if hat.quantity.present? && hat.quantity < 1 %>
+                    <span class="alert alert-warning p-1" role="alert"> Out of Stock</span>
+                    <%end%>
                 <% end %>
 
               </div>

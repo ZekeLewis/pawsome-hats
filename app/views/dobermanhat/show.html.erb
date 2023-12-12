@@ -19,21 +19,30 @@
       <p><strong>Color:</strong> <%= @hat.colour %></p>
       <p><strong>Material:</strong> <%= @hat.material %></p>
       <p><strong>Category:</strong> <%= @hat.category %></p>
+       <p><strong>Fit:</strong> <%= @hat.fit %></p>
       <% if current_user&.isvendors == 'y' %>
         <p><strong>Quantity:</strong> <%= @hat.quantity %></p>
-        <% if @hat.quantity.present? && @hat.quantity < 5 %>
-            <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
-              <% end %>
+        <% if @hat.quantity.present? && @hat.quantity < 5 && @hat.quantity >= 1 %>
+                      <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
+                    <%end%>
+                    <%if @hat.quantity.present? && @hat.quantity < 1 %>
+                    <span class="alert alert-warning p-1" role="alert"> Out of Stock</span>
+                    <%end%>
           </p>
       <% else %>
-          <% if @hat.quantity.present? && @hat.quantity < 5 %>
-           <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
-            <% end %>
+          <% if @hat.quantity.present? && @hat.quantity < 5 && @hat.quantity >= 1 %>
+                      <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
+                    <%end%>
+                    <%if @hat.quantity.present? && @hat.quantity < 1 %>
+                    <span class="alert alert-warning p-1" role="alert"> Out of Stock</span>
+                    <%end%>
        <% end %>
 
     </div>
     <div class="my-3">
+     <%if @hat.quantity.present? && @hat.quantity >= 1 %>
     <%= link_to "Add to cart" , dobermanhat_add_to_cart_path, class: "btn btn-secondary ml-2" %>
+    <%end%>
     <%= link_to "Back", dobermanindex_path, class: "btn btn-secondary ml-2" %>
   </div>
   </div>
