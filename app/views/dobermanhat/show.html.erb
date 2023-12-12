@@ -40,7 +40,9 @@
 
     </div>
     <div class="my-3">
+     <%if @hat.quantity.present? && @hat.quantity >= 1 %>
     <%= link_to "Add to cart" , dobermanhat_add_to_cart_path, class: "btn btn-secondary ml-2" %>
+    <%end%>
     <%= link_to "Back", dobermanindex_path, class: "btn btn-secondary ml-2" %>
   </div>
   </div>
