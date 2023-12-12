@@ -30,9 +30,12 @@
                     <%end%>
           </p>
       <% else %>
-          <% if @hat.quantity.present? && @hat.quantity < 5 %>
-           <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
-            <% end %>
+          <% if @hat.quantity.present? && @hat.quantity < 5 && @hat.quantity >= 1 %>
+                      <span class="alert alert-warning p-1" role="alert"> Only <%= @hat.quantity %> left!</span>
+                    <%end%>
+                    <%if @hat.quantity.present? && @hat.quantity < 1 %>
+                    <span class="alert alert-warning p-1" role="alert"> Out of Stock</span>
+                    <%end%>
        <% end %>
 
     </div>
