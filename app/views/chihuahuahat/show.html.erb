@@ -18,6 +18,7 @@
       <p><strong>Color:</strong> <%= @hat.colour %></p>
       <p><strong>Material:</strong> <%= @hat.material %></p>
       <p><strong>Category:</strong> <%= @hat.category %></p>
+       <p><strong>Fit:</strong> <%= @hat.fit %></p>
       <% if current_user&.isvendors == 'y' %>
         <p><strong>Quantity:</strong> <%= @hat.quantity %></p>
         <% if @hat.quantity.present? && @hat.quantity < 5 && @hat.quantity >= 1 %>
