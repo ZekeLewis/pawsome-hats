@@ -74,12 +74,14 @@ Rails.application.routes.draw do
   post 'home/feedback', to: 'feedbacks#create', as: 'create_home_feedback'
 
   #promocode
+  post 'cart/review/apply_promo_code', to: 'cart#apply_promo_code', as: 'cart_apply_promo_code'
   post 'cart/review/:id/apply_promo_code', to: 'carts#apply_promo_code'
-  post 'cart/apply_promo_code', to: 'cart#apply_promo_code', as: 'cart_apply_promo_code'
+
   
   #checkout
   get 'checkout', to: 'checkout#new', as: 'new_checkout'
   post 'checkout/create', to: 'checkout#create', as: 'checkout_create'
+  post 'checkout/checkout', to: 'checkout#checkout', as: 'checkout'
 
   #orderhistory
   get 'order', to: 'order#orderhistory' , as: 'order_history'

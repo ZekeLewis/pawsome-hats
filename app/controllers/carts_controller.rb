@@ -3,9 +3,10 @@ class CartsController < ApplicationController
   before_action :set_current_cart
 
   def show
-      render :show
+    render :show
     @cart = current_user.cart
     @cart_items = @current_cart.cart_items.includes(:hat)
+    #render :json => @cart
   end
   
  
@@ -48,10 +49,14 @@ class CartsController < ApplicationController
       end
     end
   end
-      def review
-      @cart_items = @current_cart.cart_items.includes(:hat)
-      render :cart
-    end
+
+  def review
+    @cart = current_user.cart
+    @cart_items = @current_cart.cart_items.includes(:hat)
+    @total_value = 0
+    render :cart
+    #render :json => @cart
+  end
 
   private
 
@@ -59,8 +64,6 @@ class CartsController < ApplicationController
     @current_cart = current_user.cart || current_user.create_cart
   end
  
-  # app/controllers/carts_controller.rb
-
 def apply_promo_code
   promo_code = params[:promo_code]
 

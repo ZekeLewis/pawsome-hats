@@ -4,9 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Review Your Cart Items</title>
+      <style>
+        .flash-message {
+          padding: 10px;
+          text-align: center;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          display: none;
+        }
+        .flash-message-success {
+          background-color: green;
+          color: white;
+        }
+        .flash-message-error {
+          background-color: red;
+          color: white;
+        }
+      </style>
 </head>
 <body>
   <div class="container mt-4">
+    <div id="flash-message-container"></div>
     <h1 class="text-center mb-4">Review Your Cart Items</h1>
 
     <div class="row">
@@ -90,7 +110,7 @@
                 <th colspan="2">Promo Code</th>
                 <th>
                   <%= text_field_tag :promo_code, nil, id: 'promo_code' %>
-                  <button id="apply-promo-code-btn" class="btn btn-primary">Apply</button>
+                  <button onclick="validate_promo()" id="apply-promo-code-btn" class="btn btn-primary">Apply</button>
                 </th>
               </tr>
               <!-- Conditionally show discount row -->
@@ -110,9 +130,47 @@
     </div>
   </div>
 
-<%= link_to 'Proceed to Checkout', new_checkout_path, class: 'btn btn-primary' if @cart_items.present? %>
+<%  unless @cart_items.empty?  %>
+  <%= form_with url: checkout_path, method: :post, remote: true do |f| %>
+    <%= f.hidden_field :total_value %>
+    <%= f.submit "Proceed to Checkout", :class=>'btn btn-primary' %>
+  <% end %>
+<% end %>
+
+<%= link_to 'Proceed to Checkout', new_checkout_path, class: 'btn btn-primary checkoutclass d-none' if @cart_items.present? %>
+
 
   <script>
+  function validate_promo(){
+    const promoCode = document.getElementById('promo_code').value;
+    let messageText;
+    let messageClass;
+
+    // Check if the promo code matches one of the valid codes
+    if (['10OFF', '15OFF', '20OFF'].includes(promoCode)) {
+      messageText = 'Valid Promo code! Enjoy your discount';
+      messageClass = 'flash-message-success'; // CSS class for success message
+    } else {
+      messageText = 'Invalid Promo code';
+      messageClass = 'flash-message-error'; // CSS class for error message
+    }
+
+    // Create the flash message element
+    const flashMessage = document.createElement('div');
+    flashMessage.className = 'flash-message ' + messageClass;
+    flashMessage.innerText = messageText;
+
+    // Append it to the container
+    const container = document.getElementById('flash-message-container');
+    container.innerHTML = ''; // Clear any previous messages
+    container.appendChild(flashMessage);
+
+    // Show the message and then hide it after a few seconds
+    flashMessage.style.display = 'block';
+    setTimeout(() => {
+      flashMessage.style.display = 'none';
+    }, 3000); // Adjust the time as needed
+  }
     document.addEventListener("DOMContentLoaded", function() {
       function recalculateCart() {
         let subtotal = 0;
@@ -139,6 +197,7 @@
         document.getElementById('shipping_fee-value').innerText = shipping_fee.toFixed(2);
         document.getElementById('total_after_discount-value').innerText = totalAfterDiscount.toFixed(2);
         document.getElementById('total_before_discount-value').innerText = (subtotal + taxes + shipping_fee).toFixed(2);
+        document.getElementById('total_value').value = totalAfterDiscount.toFixed(2);
       }
 
       // Function to apply promo code

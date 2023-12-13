@@ -28,7 +28,14 @@
       <% end %>
     </table>
 
-    <p>Total: <%= number_to_currency(@total) %></p>
+ 
+<!-- Add this block of code where you want to display the total after discount -->
+<% if @total_after_discount %>
+  <p>Total after Discount: <%= number_to_currency(@total_after_discount) %></p>
+<% else %>
+  <p>Total: <%= number_to_currency(@total) %></p>
+<% end %>
+
 
     <div class="row">
       <!-- Shipping Information Card -->
